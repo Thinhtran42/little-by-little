@@ -29,5 +29,5 @@ databases:
     region: singapore
     postgresMajorVersion: "17"
     databaseName: little_english
-    user: little_app
+    user: little_demo_app
     ipAllowList: []

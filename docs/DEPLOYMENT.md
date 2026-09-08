@@ -48,4 +48,4 @@ Render Free PostgreSQL phù hợp demo ngắn hạn, không phải backup dài h
 
 Bản demo chưa có email verification, SMTP, thanh toán, subscription, monitoring đầy đủ hoặc load test lớn. Bản bán thật cần domain HTTPS, PostgreSQL trả phí với backup/PITR, SMTP, privacy/terms, billing, rate limit dùng chung và kiểm thử thiết bị thật.
 
-Xem thêm: [README](../README.md), [kiến trúc](ARCHITECTURE.md), [Render](RENDER.md), [phát hành](RELEASE.md).
+Xem thêm: [README](../README.md), [kiến trúc](ARCHITECTURE.md), [Render](RENDER.md), [phát hành](RELEASE.md), [vận hành và CI/CD](OPERATIONS.md).
