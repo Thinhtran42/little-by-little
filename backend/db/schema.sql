@@ -64,3 +64,11 @@ CREATE TABLE IF NOT EXISTS audit_log (
  action text NOT NULL, target_id text, created_at timestamptz NOT NULL DEFAULT now()
 );
 INSERT INTO schema_migrations(version) VALUES(1) ON CONFLICT DO NOTHING;
+CREATE TABLE IF NOT EXISTS lesson_attempts (
+ user_id text NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ event_key text NOT NULL, lesson_id text NOT NULL, version integer NOT NULL,
+ question_id text NOT NULL, answer text NOT NULL, correct boolean NOT NULL,
+ hinted boolean NOT NULL, day date NOT NULL, due_day date NOT NULL,
+ created_at timestamptz NOT NULL DEFAULT now(), PRIMARY KEY(user_id,event_key)
+);
+CREATE INDEX IF NOT EXISTS lesson_attempts_user_lesson_idx ON lesson_attempts(user_id,lesson_id,version,created_at DESC);

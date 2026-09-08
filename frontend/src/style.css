@@ -2082,3 +2082,14 @@ footer > span {
 .story-dialogue > div { border-top:1px solid #d4dfd5; padding:10px 0; }
 .story-dialogue p { line-height:1.8; }
 @media(max-width:650px) { .story-group-grid { grid-template-columns:1fr; } .home-discover { display:block; padding:20px; } }
+.phrasal-hub { max-width:1080px; margin:0 auto; }
+.phrasal-hub > .phrasal-stories { background:transparent; border:0; padding:0; margin-top:0; }
+.phrasal-hub .story-group-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.phrasal-hub .story-group-grid > button { padding:14px; }
+.phrasal-hub .story-group-grid h3 { font-size:19px; }
+.phrasal-hub .story-group-grid .story-scene { max-height:125px; }
+.phrasal-hub .story-group-grid p { font-size:14px; }
+.phrasal-intro { color:#607267; max-width:600px; line-height:1.7; margin-bottom:24px; }
+button[title="Phát âm thanh"] { display:inline-flex; align-items:center; justify-content:center; min-width:44px; min-height:44px; padding:9px; vertical-align:middle; }
+@media(max-width:900px) { .phrasal-hub .story-group-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:550px) { .phrasal-hub .story-group-grid { grid-template-columns:1fr; } }

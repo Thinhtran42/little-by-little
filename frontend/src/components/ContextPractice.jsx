@@ -1,3 +1,4 @@
+import { Volume2 as PlaybackIcon } from "lucide-react";
 import React, { useState } from 'react';
 import { Coffee, Plane, BriefcaseBusiness, House, Users, ShoppingBag, MessageCircle, Volume2 } from 'lucide-react';
 
@@ -36,7 +37,7 @@ export default function ContextPractice({ phrase: p, speak, onReady }) {
         <h2>{flipped ? p.en : p.vi}</h2>
         <span>{flipped ? p.vi : 'Thử nói trước, rồi chạm để lật thẻ ↻'}</span>
       </button>
-      {flipped && <div className="context-reveal"><button className="listen-button" onClick={() => speak(p.en)}><Volume2 size={18}/> Nghe và đọc theo</button>{p.note && <p>{p.note}</p>}<p>Hãy nghĩ đến một người mà bạn có thể nói câu này cùng.</p></div>}
+      {flipped && <div className="context-reveal"><button className="listen-button" onClick={() => speak(p.en)} aria-label="Phát âm thanh" title="Phát âm thanh"><PlaybackIcon size={20} aria-hidden="true" /></button>{p.note && <p>{p.note}</p>}<p>Hãy nghĩ đến một người mà bạn có thể nói câu này cùng.</p></div>}
       <button className="primary wide" disabled={!flipped} onClick={() => setStep('build')}>Thử xếp câu →</button>
     </> : <>
       <h3>Ghép lại điều bạn vừa học</h3><p>{p.vi}</p>

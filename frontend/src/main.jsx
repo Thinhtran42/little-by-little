@@ -1,5 +1,6 @@
+import { Volume2 as PlaybackIcon } from "lucide-react";
 import React, { useState, useEffect } from "react";
-import PhrasalStories from './components/PhrasalStories.jsx';
+import PhrasalHub from './components/PhrasalHub.jsx';
 import { createRoot } from "react-dom/client";
 import {
   House,
@@ -388,9 +389,7 @@ function App() {
           title="Nghe phát âm"
           aria-label={`Nghe ${p.en}`}
           onClick={() => speak(p.type === "phrasal" ? p.note : p.en)}
-        >
-          <Icon name="Volume2" size={19} />
-        </button>
+        ><PlaybackIcon size={20} aria-hidden="true" /></button>
         <button
           className={`icon-button ${data.saved.includes(p.id) ? "is-saved" : ""}`}
           aria-label={`Lưu ${p.en}`}
@@ -848,9 +847,7 @@ function App() {
                       <button
                         aria-label="Nghe One step at a time"
                         onClick={() => speak("One step at a time.")}
-                      >
-                        <Icon name="Volume2" size={17} />
-                      </button>
+                       title="Phát âm thanh"><PlaybackIcon size={20} aria-hidden="true" /></button>
                     </div>
                   </section>
                 </aside>
@@ -900,7 +897,7 @@ function App() {
               </div>
             </>
           )}
-          {page === 'phrasal' && <PhrasalStories speak={speak} />}
+          {page === 'phrasal' && <PhrasalHub speak={speak}/>}
           {(topic || page === "saved") && (
             <>
               <div className="library-toolbar">

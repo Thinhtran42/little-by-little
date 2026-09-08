@@ -1,4 +1,5 @@
 import { readConfig } from "./config/index.js";
+import { lessonsRoutes } from './modules/lessons/lessons.routes.js';
 import { registerAuthGuard } from "./http/auth-guard.js";
 import { registerErrorHandler } from "./http/error-handler.js";
 import { catalogRoutes } from "./modules/catalog/catalog.routes.js";
@@ -63,6 +64,7 @@ export async function createApp({
   await catalogRoutes(app, { db });
   await adminRoutes(app, { db });
   await learningRoutes(app, { db });
+  await lessonsRoutes(app,{db});
   const dist = resolve(projectRoot, "dist");
   if (serveFrontend && existsSync(dist)) {
     await app.register(staticFiles, { root: dist });

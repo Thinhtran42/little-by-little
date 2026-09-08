@@ -1,3 +1,4 @@
+import { Volume2 as PlaybackIcon } from "lucide-react";
 import { eventKey } from "../services/eventKey.js";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -277,10 +278,7 @@ export default function StudySession({
                   <h2>{p.en}</h2>
                   <p className="translation">{p.vi}</p>
                   {p.note && <p className="context-note">{p.note}</p>}
-                  <button className="listen-button" onClick={() => speak(p.en)}>
-                    <Volume2 size={18} />
-                    Nghe câu mẫu
-                  </button>
+                  <button className="listen-button" onClick={() => speak(p.en)} aria-label="Phát âm thanh" title="Phát âm thanh"><PlaybackIcon size={20} aria-hidden="true" /></button>
                 </div>
                 <p className="study-hint">
                   Đọc thành tiếng một lần. Bước tiếp theo sẽ ẩn tiếng Anh.
@@ -329,10 +327,7 @@ export default function StudySession({
                       <button
                         className="audio-prompt"
                         onClick={() => speak(p.en)}
-                      >
-                        <Volume2 size={32} />
-                        <span>Phát câu tiếng Anh</span>
-                      </button>
+                       aria-label="Phát âm thanh" title="Phát âm thanh"><PlaybackIcon size={20} aria-hidden="true" /></button>
                       <button
                         className="text-button"
                         onClick={() => {
@@ -473,10 +468,7 @@ export default function StudySession({
                     <button
                       className="listen-button"
                       onClick={() => speak(p.en)}
-                    >
-                      <Volume2 size={16} />
-                      Nghe lại mẫu
-                    </button>
+                     aria-label="Phát âm thanh" title="Phát âm thanh"><PlaybackIcon size={20} aria-hidden="true" /></button>
                   </div>
                 )}
                 {feedback && (

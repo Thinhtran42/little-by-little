@@ -1,3 +1,4 @@
+import { Volume2 as PlaybackIcon } from "lucide-react";
 import { eventKey } from "../services/eventKey.js";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -446,9 +447,7 @@ export function PracticePage({ data, setData, start, speak, notify }) {
                   className="icon-button"
                   aria-label="Nghe lời đối thoại"
                   onClick={() => speak(active.steps[index].line)}
-                >
-                  <Volume2 size={18} />
-                </button>
+                 title="Phát âm thanh"><PlaybackIcon size={20} aria-hidden="true" /></button>
               </div>
               <p className="scenario-prompt">{active.steps[index].prompt}</p>
               <div className="answer-choices">
@@ -492,10 +491,7 @@ export function PracticePage({ data, setData, start, speak, notify }) {
                     <button
                       className="listen-button"
                       onClick={() => speak(active.steps[index].answer)}
-                    >
-                      <Volume2 size={16} />
-                      Nghe lời đáp mẫu
-                    </button>
+                     aria-label="Phát âm thanh" title="Phát âm thanh"><PlaybackIcon size={20} aria-hidden="true" /></button>
                   </div>
                   <details className="personalize">
                     <summary>Đọc lại lời đáp & tự nghe</summary>
@@ -786,10 +782,7 @@ export function AccountPage({ data, setData, notify, onSetup, speak }) {
         <button
           className="listen-button"
           onClick={() => speak("A little progress, every day.")}
-        >
-          <Volume2 size={17} />
-          Thử giọng đọc
-        </button>
+         aria-label="Phát âm thanh" title="Phát âm thanh"><PlaybackIcon size={20} aria-hidden="true" /></button>
         <small>Giọng và khả năng nghe ngoại tuyến phụ thuộc thiết bị.</small>
       </section>
       <section className="account-card">
