@@ -1,0 +1,33 @@
+# Demo only: Render Free PostgreSQL expires after 30 days.
+services:
+  - type: web
+    name: little-by-little-demo
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: "10000"
+      - key: TRUST_PROXY
+        value: "true"
+      - key: DB_POOL_SIZE
+        value: "5"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: little-by-little-demo-db
+          property: connectionString
+databases:
+  - name: little-by-little-demo-db
+    plan: free
+    region: singapore
+    postgresMajorVersion: "17"
+    databaseName: little_english
+    user: little_app
+    ipAllowList: []

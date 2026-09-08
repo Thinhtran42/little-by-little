@@ -1,0 +1,11 @@
+node_modules
+dist
+test-results
+playwright-report
+.env
+.env.render
+.data/
+releases/
+*.log
+*.dump
+artifacts/

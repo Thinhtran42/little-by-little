@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: little_english
+      POSTGRES_USER: little_app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run npm run setup first}
+    ports:
+      - "127.0.0.1:54329:5432"
+    volumes:
+      - little_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U little_app -d little_english"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  little_pgdata:

@@ -1,0 +1,141 @@
+.sync-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  margin: 0 0 22px;
+  border: 1px solid #d8e3ce;
+  border-radius: 9px;
+  background: #f0f5e9;
+  color: #526b40;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.sync-banner > svg {
+  flex-shrink: 0;
+}
+.sync-banner > .text-button {
+  margin-left: auto;
+  white-space: nowrap;
+}
+.sync-error {
+  background: #fff3df;
+  border-color: #e8c999;
+  color: #805d27;
+}
+.cloud-account {
+  margin-bottom: 24px;
+}
+.cloud-account form {
+  max-width: 500px;
+}
+.cloud-account .exercise-tabs {
+  justify-content: flex-start;
+  max-width: 500px;
+  margin: 22px 0 12px;
+}
+.cloud-account .backup-actions {
+  align-items: center;
+}
+.cloud-account .account-help {
+  font-size: 11px;
+  max-width: 650px;
+}
+.account-message {
+  padding: 12px;
+  background: #fff4e3;
+  border-radius: 8px;
+  color: #845b28 !important;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 14px 0;
+}
+.recovery-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 22px;
+  background: #f5f1df;
+  border: 1px solid #e4d8b4;
+  border-radius: 12px;
+  margin-top: 23px;
+}
+.recovery-box > p {
+  flex-basis: 100%;
+  color: #776239;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.recovery-box code {
+  flex-basis: 100%;
+  word-break: break-all;
+  font-size: 16px;
+  background: white;
+  border-radius: 6px;
+  padding: 12px;
+  color: #4d6038;
+}
+.content-editor {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #dfe6d4;
+}
+.content-editor > p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #63794f;
+  margin: 10px 0 17px;
+}
+.content-editor .field-label textarea {
+  display: block;
+  margin-top: 8px;
+}
+.app-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  color: #52753b;
+}
+.app-loading h2 {
+  font-size: 18px;
+}
+.cloud-account .hint-box button {
+  margin: 10px 8px 0 0;
+}
+@media (max-width: 620px) {
+  .sync-banner {
+    font-size: 9px;
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 7px;
+  }
+  .sync-banner > span {
+    flex: 1;
+    min-width: 160px;
+  }
+  .sync-banner .text-button {
+    font-size: 9px;
+  }
+  .cloud-account {
+    padding: 20px;
+  }
+  .cloud-account .exercise-tabs {
+    gap: 5px;
+  }
+  .cloud-account .backup-actions {
+    align-items: stretch;
+  }
+  .recovery-box {
+    padding: 17px;
+  }
+  .recovery-box strong {
+    font-size: 12px;
+  }
+  .recovery-box code {
+    font-size: 13px;
+  }
+}
