@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PhrasalStories from './components/PhrasalStories.jsx';
 import { createRoot } from "react-dom/client";
 import {
   House,
@@ -685,7 +686,7 @@ function App() {
                   </div>
                 </div>
               </section>
-              <section className="stats">
+              <details className="home-details"><summary>Tiến độ của bạn</summary><section className="stats">
                 <div className="stat">
                   <span className="stat-icon mint">
                     <Icon name="BookOpen" />
@@ -743,6 +744,9 @@ function App() {
                   </div>
                 </div>
               </section>
+              </details>
+              <section className="home-discover"><div><span className="eyebrow">MỖI CÂU LÀ MỘT CÂU CHUYỆN</span><h2>Hôm nay, bạn muốn đi đâu?</h2><p>Học một nhóm phrasal verb qua đoạn đọc và hội thoại trong cùng tình huống.</p></div><button className="primary" onClick={() => nav('phrasal')}>Khám phá câu chuyện →</button></section>
+              <details className="home-details"><summary>Xem chi tiết lộ trình và chủ đề</summary>
               <PlanPanel
                 data={data}
                 plan={plan}
@@ -868,6 +872,7 @@ function App() {
                   <Icon name="ArrowRight" size={16} />
                 </button>
               </section>
+              </details>
             </>
           )}
           {page === "topics" && !topic && (
@@ -895,7 +900,8 @@ function App() {
               </div>
             </>
           )}
-          {(topic || page === "phrasal" || page === "saved") && (
+          {page === 'phrasal' && <PhrasalStories speak={speak} />}
+          {(topic || page === "saved") && (
             <>
               <div className="library-toolbar">
                 <div className="search">

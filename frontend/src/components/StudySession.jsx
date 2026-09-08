@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { checkAnswer, wordDiff, choiceOptions } from "../learning.js";
 import { useCatalog } from "../state/CatalogContext.jsx";
+import ContextPractice from './ContextPractice.jsx';
 
 export function VoiceRecorder() {
   const [recording, setRecording] = useState(false),
@@ -127,7 +128,7 @@ export default function StudySession({
     ),
     [index, setIndex] = useState(0),
     [stage, setStage] = useState(
-      mode === "learn" && !data.learned[items[0]?.id] ? "preview" : "test",
+      !data.learned[items[0]?.id] ? "preview" : "test",
     ),
     [exercise, setExercise] = useState(
       mode === "listen" ? "listen" : mode === "choice" ? "choice" : "recall",
@@ -154,7 +155,7 @@ export default function StudySession({
     setNote(data.notes[next.phrase.id] || "");
     submitted.current = false;
     setStage(
-      mode === "learn" && !data.learned[next.phrase.id] && !next.retry
+      !data.learned[next.phrase.id] && !next.retry
         ? "preview"
         : "test",
     );
@@ -262,6 +263,8 @@ export default function StudySession({
               <i style={{ width: `${(index / queue.length) * 100}%` }} />
             </div>
             {stage === "preview" ? (
+              <ContextPractice key={index} phrase={p} speak={speak} onReady={() => { setStage('test'); window.speechSynthesis?.cancel(); }} />
+            ) : stage === "legacy-preview" ? (
               <>
                 <div className="flashcard">
                   <span className="type-label">
@@ -299,6 +302,7 @@ export default function StudySession({
                   role="group"
                   aria-label="Kiểu bài tập"
                 >
+                  <button disabled={!!feedback || submitting} onClick={() => { setHinted(true); setStage('preview'); }}>Thẻ & xếp câu</button>
                   {[
                     ["recall", "Tự viết", PenLine],
                     ["listen", "Nghe & viết", Headphones],
