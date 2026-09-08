@@ -4,7 +4,7 @@
 
 Browser gọi một Render Web Service Docker. Service chứa React/Vite đã build thành `dist/`, Fastify xử lý `/api/*`, và kết nối PostgreSQL bằng `DATABASE_URL`. Frontend không truy cập database trực tiếp; backend tự chấm đáp án và cập nhật tiến độ trong transaction.
 
-`frontend/src/` là giao diện; `backend/routes/` là API; `backend/db/schema.sql` là schema PostgreSQL; `backend/db/seed.js` nạp nội dung; `backend/services/` lưu tiến độ; `shared/` chứa catalog và logic lịch ôn; `Dockerfile` build production; `render.yaml` mô tả Render Web Service và PostgreSQL.
+`frontend/src/` là giao diện; `backend/modules/` là API; `backend/db/schema.sql` là schema PostgreSQL; `backend/db/seed.js` nạp nội dung; `backend/modules/learning/` lưu tiến độ; `shared/` chứa catalog và logic lịch ôn; `Dockerfile` build production; `render.yaml` mô tả Render Web Service và PostgreSQL.
 
 Database có users, sessions, topics, phrases, scenarios, phrase_progress, attempts, bookmarks, personal_notes, daily_activity và audit_log.
 
@@ -33,6 +33,8 @@ Trong Render Dashboard chọn **New → Blueprint**, kết nối GitHub, chọn 
 Backend khởi động sẽ chạy schema, seed nội dung nếu chưa tồn tại, xóa session hết hạn rồi phục vụ UI. Seed không ghi đè nội dung admin đã sửa.
 
 ## Biến môi trường production
+
+Khi chuyển database từ Render sang Supabase hoặc PostgreSQL khác, xem [DATABASE-PROVIDERS.md](DATABASE-PROVIDERS.md). Đổi URL kết nối không tự chuyển dữ liệu người dùng.
 
 Các biến chính là `NODE_ENV=production`, `HOST=0.0.0.0`, `PORT=10000`, `DATABASE_URL`, `PUBLIC_ORIGIN`, `TRUST_PROXY=true`, `DB_POOL_SIZE=5`. Render tự tạo `DATABASE_URL`; nếu không đặt `PUBLIC_ORIGIN`, backend dùng `RENDER_EXTERNAL_URL`. Không đưa password database vào GitHub. Cookie production là Secure/HttpOnly/SameSite=Lax.
 

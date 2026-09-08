@@ -40,8 +40,8 @@ Mất mạng: tài khoản báo lưu thất bại và cho thử lại. Chế đ�
 ```text
 frontend/src/             React, màn hình học, state và API client
 frontend/public/          Icon và thông báo giấy phép
-backend/routes/          API tài khoản, học tập, quản trị
-backend/services/        Lưu tiến độ và snapshot nhất quán
+backend/modules/          API tài khoản, học tập, quản trị
+backend/modules/learning/        Lưu tiến độ và snapshot nhất quán
 backend/db/schema.sql    Bảng, khóa ngoại, chỉ mục, migration v1
 shared/                  Nội dung seed và hàm chấm/lập lịch thuần
 backend/tests/           Auth, phân quyền, giao dịch, chấm bài
@@ -74,3 +74,5 @@ Production phục vụ `dist` và API qua backend (`npm start` với `NODE_ENV=p
 
 Đây là nền tảng cho bản beta có tài khoản, chưa phải cam kết chịu tải lớn hoặc đã chứng minh cải thiện giao tiếp. Xem [định hướng sản phẩm](docs/PRODUCT.md) về đo hiệu quả học và giới hạn.
 
+
+Hướng dẫn tổ chức backend và thêm module: [BACKEND-STRUCTURE.md](docs/BACKEND-STRUCTURE.md).

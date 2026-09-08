@@ -3,7 +3,7 @@ import {
   normalizeProgress,
   recordAttempt,
   dayKey,
-} from "../../shared/progress.js";
+} from "../../../shared/progress.js";
 export const dayFor = (timezone, now = new Date()) =>
   new Intl.DateTimeFormat("en-CA", {
     timeZone: timezone,

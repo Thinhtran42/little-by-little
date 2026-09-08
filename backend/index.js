@@ -1,8 +1,9 @@
 import { connectDatabase, migrate } from "./db/index.js";
 import { seed } from "./db/seed.js";
 import { createApp } from "./app.js";
-const production = process.env.NODE_ENV === "production";
-const publicOrigin = process.env.PUBLIC_ORIGIN || process.env.RENDER_EXTERNAL_URL;
+import { readConfig } from "./config/index.js";
+const config = readConfig();
+const { production, publicOrigin } = config;
 if (production && !publicOrigin)
   throw new Error("PUBLIC_ORIGIN is required in production.");
 const db = await connectDatabase();
@@ -11,9 +12,10 @@ await seed(db);
 await db.query("DELETE FROM sessions WHERE expires_at<now()");
 const app = await createApp({
   db,
+  config,
   production,
   logger: true,
-  serveFrontend: production || process.env.SERVE_FRONTEND === "true",
+  serveFrontend: config.serveFrontend,
   origins: publicOrigin ? [new URL(publicOrigin).origin] : undefined,
 });
 const close = async () => {
@@ -24,9 +26,7 @@ const close = async () => {
 process.on("SIGINT", close);
 process.on("SIGTERM", close);
 await app.listen({
-  port: Number(process.env.PORT || 3001),
-  host: process.env.HOST || "127.0.0.1",
+  port: config.port,
+  host: config.host,
 });
-console.log(
-  `API ready on port ${process.env.PORT || 3001}; database: ${db.kind}`,
-);
+console.log(`API ready on port ${config.port}; database: ${db.kind}`);
