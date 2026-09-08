@@ -2,8 +2,12 @@ CREATE TABLE IF NOT EXISTS schema_migrations (version integer PRIMARY KEY, appli
 CREATE TABLE IF NOT EXISTS users (
  id text PRIMARY KEY, email text NOT NULL UNIQUE, password_hash text NOT NULL,
  role text NOT NULL DEFAULT 'learner' CHECK (role IN ('learner','admin')),
+ auth_provider text NOT NULL DEFAULT 'password', provider_subject text,
  recovery_hash text, created_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE users ADD COLUMN IF NOT EXISTS auth_provider text NOT NULL DEFAULT 'password';
+ALTER TABLE users ADD COLUMN IF NOT EXISTS provider_subject text;
+CREATE UNIQUE INDEX IF NOT EXISTS users_provider_subject_idx ON users(auth_provider,provider_subject) WHERE provider_subject IS NOT NULL;
 CREATE TABLE IF NOT EXISTS sessions (
  token_hash text PRIMARY KEY, user_id text NOT NULL REFERENCES users(id) ON DELETE CASCADE,
  expires_at timestamptz NOT NULL, created_at timestamptz NOT NULL DEFAULT now()

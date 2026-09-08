@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Cloud,
   LogIn,
@@ -46,6 +46,20 @@ export default function CloudAccount() {
     [message, setMessage] = useState(""),
     [recovery, setRecovery] = useState(""),
     [confirmImport, setConfirmImport] = useState(false);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const authError = params.get("auth_error");
+    if (authError) {
+      const messages = {
+        google_not_configured: "Đăng nhập Google chưa được cấu hình trên máy chủ.",
+        google_cancelled: "Bạn đã hủy đăng nhập Google.",
+        google_state: "Phiên đăng nhập Google đã hết hạn. Hãy thử lại.",
+        google_failed: "Không thể đăng nhập bằng Google. Hãy thử lại.",
+      };
+      setMessage(messages[authError] || messages.google_failed);
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
   async function submit(e) {
     e.preventDefault();
     setPending(true);
@@ -116,6 +130,12 @@ export default function CloudAccount() {
             ))}
           </div>
           <form onSubmit={submit}>
+            {mode === "login" && (
+              <a className="google-login-button" href="/api/auth/google/start">
+                <span aria-hidden="true">G</span>
+                Tiếp tục với Google
+              </a>
+            )}
             {mode === "register" && (
               <>
                 <label className="field-label" htmlFor="account-name">

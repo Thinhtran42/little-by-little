@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import { OAuth2Client } from "google-auth-library";
 import {
   hashPassword,
   verifyPassword,
@@ -11,6 +12,12 @@ import { initialState } from "../../shared/progress.js";
 import { fail, text, validateEmail } from "../errors.js";
 export async function authRoutes(app, { db, production }) {
   const dummy = await hashPassword(token());
+  const googleClientId = process.env.GOOGLE_CLIENT_ID || "";
+  const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET || "";
+  const googleRedirectUri =
+    process.env.GOOGLE_REDIRECT_URI ||
+    `${process.env.PUBLIC_ORIGIN || process.env.RENDER_EXTERNAL_URL || "http://localhost:3001"}/api/auth/google/callback`;
+  const google = googleClientId ? new OAuth2Client(googleClientId) : null;
   const publicRoute = {
     config: { public: true, rateLimit: { max: 15, timeWindow: "15 minutes" } },
   };
@@ -31,6 +38,89 @@ export async function authRoutes(app, { db, production }) {
       maxAge: 7 * 86400,
     });
   }
+  function oauthCookie(reply, raw) {
+    reply.setCookie("google_oauth_state", raw, {
+      path: "/api/auth/google",
+      httpOnly: true,
+      sameSite: "lax",
+      secure: production,
+      maxAge: 600,
+    });
+  }
+  function clearOauthCookie(reply) {
+    reply.clearCookie("google_oauth_state", { path: "/api/auth/google" });
+  }
+  app.get("/api/auth/google/start", { config: { public: true } }, async (req, reply) => {
+    if (!googleClientId || !googleClientSecret) {
+      return reply.redirect("/?auth_error=google_not_configured");
+    }
+    const state = token();
+    oauthCookie(reply, state);
+    const params = new URLSearchParams({
+      client_id: googleClientId,
+      redirect_uri: googleRedirectUri,
+      response_type: "code",
+      scope: "openid email profile",
+      state,
+      prompt: "select_account",
+    });
+    return reply.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${params}`);
+  });
+  app.get("/api/auth/google/callback", { config: { public: true } }, async (req, reply) => {
+    const state = String(req.query?.state || ""),
+      expected = String(req.cookies.google_oauth_state || "");
+    clearOauthCookie(reply);
+    if (!google || !googleClientSecret || !state || !expected || hashToken(state) !== hashToken(expected))
+      return reply.redirect("/?auth_error=google_state");
+    try {
+      const code = String(req.query?.code || "");
+      if (!code) return reply.redirect("/?auth_error=google_cancelled");
+      const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
+        method: "POST",
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          code,
+          client_id: googleClientId,
+          client_secret: googleClientSecret,
+          redirect_uri: googleRedirectUri,
+          grant_type: "authorization_code",
+        }),
+      });
+      if (!tokenResponse.ok) throw new Error("Google token exchange failed");
+      const tokens = await tokenResponse.json();
+      const ticket = await google.verifyIdToken({
+        idToken: tokens.id_token,
+        audience: googleClientId,
+      });
+      const profile = ticket.getPayload();
+      if (!profile?.sub || !profile.email || profile.email_verified !== true)
+        throw new Error("Google account email is not verified");
+      const address = validateEmail(profile.email), name = text(profile.name || "", "Tên", { max: 40 });
+      const raw = await db.transaction(async (tx) => {
+        let user = (await tx.query("SELECT * FROM users WHERE auth_provider='google' AND provider_subject=$1", [profile.sub])).rows[0];
+        if (!user) user = (await tx.query("SELECT * FROM users WHERE email=$1", [address])).rows[0];
+        if (!user) {
+          const id = randomUUID();
+          const passwordHash = await hashPassword(token());
+          user = (await tx.query(
+            "INSERT INTO users(id,email,password_hash,auth_provider,provider_subject) VALUES($1,$2,$3,'google',$4) RETURNING *",
+            [id, address, passwordHash, profile.sub],
+          )).rows[0];
+          const d = initialState();
+          d.profile.name = name;
+          await tx.query("INSERT INTO learner_settings(user_id,profile,audio) VALUES($1,$2,$3)", [id, JSON.stringify(d.profile), JSON.stringify(d.audio)]);
+        } else {
+          await tx.query("UPDATE users SET auth_provider='google',provider_subject=COALESCE(provider_subject,$2) WHERE id=$1", [user.id, profile.sub]);
+        }
+        return session(tx, user.id);
+      });
+      cookie(reply, raw);
+      return reply.redirect("/?auth=google_success");
+    } catch (error) {
+      req.log.warn({ err: error }, "google_auth_failed");
+      return reply.redirect("/?auth_error=google_failed");
+    }
+  });
   app.post("/api/auth/register", publicRoute, async (req, reply) => {
     const address = validateEmail(req.body?.email),
       password = text(req.body?.password, "Mật khẩu", { min: 12, max: 128 }),

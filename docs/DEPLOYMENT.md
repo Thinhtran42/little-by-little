@@ -36,6 +36,8 @@ Backend khởi động sẽ chạy schema, seed nội dung nếu chưa tồn t�
 
 Các biến chính là `NODE_ENV=production`, `HOST=0.0.0.0`, `PORT=10000`, `DATABASE_URL`, `PUBLIC_ORIGIN`, `TRUST_PROXY=true`, `DB_POOL_SIZE=5`. Render tự tạo `DATABASE_URL`; nếu không đặt `PUBLIC_ORIGIN`, backend dùng `RENDER_EXTERNAL_URL`. Không đưa password database vào GitHub. Cookie production là Secure/HttpOnly/SameSite=Lax.
 
+Đăng nhập Google dùng OAuth 2.0 Authorization Code flow. Đặt `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` và `GOOGLE_REDIRECT_URI` trong Render Environment; redirect URI phải đúng tuyệt đối dạng `https://little-by-little-demo.onrender.com/api/auth/google/callback`. Tạo OAuth client loại **Web application** trong Google Cloud Console và thêm domain production vào Authorized JavaScript origins nếu cần. Nếu chưa đặt các biến này, nút Google sẽ báo chưa được cấu hình và đăng nhập email/mật khẩu vẫn hoạt động.
+
 ## Kiểm tra sau deploy
 
 Đăng ký tài khoản, lưu recovery code, học một câu, tải lại, đăng nhập ở cửa sổ khác, thử đăng xuất/đăng nhập sai, khôi phục và kiểm tra mobile. Có thể chạy browser test bằng cách đặt biến `RELEASE_URL` tới URL Render rồi chạy `npx playwright test --config playwright.release.config.js`.
