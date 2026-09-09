@@ -1,0 +1,143 @@
+/* Vietnamese titles use the full local font to avoid mixed serif fallback glyphs. */
+.studio-app h1,
+.studio-app h2,
+.studio-learning .story-group-grid h3,
+.studio-learning .scenario-card h3,
+.studio-learning .practice-modes h3 {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+.studio-app .studio-hero h2 {
+  font-size: clamp(30px, 2.7vw, 40px);
+  line-height: 1.35;
+}
+.studio-app h1 {
+  font-size: clamp(30px, 3vw, 44px);
+}
+.studio-app .studio-section-title h2 {
+  font-size: 27px;
+}
+.studio-app .studio-kicker,
+.studio-app .studio-topic .studio-kicker,
+.studio-app .studio-path-list small {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+.studio-app .studio-topic small,
+.studio-app .studio-topic-art > span {
+  font-size: 12px;
+}
+.studio-app .studio-topbar {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+.studio-learning .story-group-grid .fn-scene {
+  height: 200px;
+  border-radius: 12px;
+}
+.studio-learning .phrasal-stories > .fn-scene {
+  height: 260px;
+  margin: 22px 0;
+  border-radius: 18px;
+}
+.studio-learning .story-group-grid h3 {
+  font-size: 22px;
+  line-height: 1.5;
+}
+.studio-context-scene {
+  height: 170px;
+  overflow: hidden;
+  border-radius: 14px;
+  margin: 10px 0 18px;
+}
+.studio-context-scene .fn-scene {
+  width: 100%;
+  height: 100%;
+}
+.studio-app .context-flip {
+  background: #eeeedf;
+  border: 1px solid #cecdbd;
+  border-radius: 18px;
+  min-height: 175px;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+.studio-app .context-flip:hover {
+  background: #e4e7d8;
+  transform: translateY(-2px);
+}
+.studio-app .context-flip h2 {
+  font-size: 25px;
+  letter-spacing: -0.03em;
+}
+.studio-app .practice-path .current {
+  color: #315ace;
+  background: #e8edfc;
+}
+.studio-app .word-tiles button,
+.studio-app .tile-answer button {
+  border-radius: 9px;
+  border-color: #cecdbd;
+  background: #fffaf0;
+  color: #23384e;
+}
+.studio-app .tile-answer {
+  background: #eeeedf;
+  border-color: #cecdbd;
+}
+.studio-app .modal-backdrop {
+  background: #172b42a6;
+  backdrop-filter: blur(6px);
+}
+.studio-app .insight-stats article {
+  background: #fffaf0;
+  border: 1px solid #cecdbd;
+  border-radius: 16px;
+}
+.studio-app .context-reveal {
+  background: #fffaf0;
+}
+.studio-app .study-modal {
+  max-width: 680px;
+}
+.studio-app .study-modal .context-note {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.studio-app .story-dialogue h3 {
+  font-size: 20px;
+}
+.studio-app .activity-chart {
+  overflow: hidden;
+}
+@media (max-width: 760px) {
+  .studio-app .studio-topbar {
+    font-size: 10px;
+  }
+  .studio-app .studio-hero h2 {
+    font-size: 30px;
+  }
+  .studio-app .studio-heading h1 {
+    font-size: 30px;
+  }
+  .studio-app .studio-section-title h2 {
+    font-size: 23px;
+  }
+  .studio-app .studio-topic .studio-kicker {
+    font-size: 11px;
+  }
+  .studio-context-scene {
+    height: 125px;
+  }
+  .studio-app .context-flip {
+    min-height: 150px;
+  }
+  .studio-learning .story-group-grid .fn-scene {
+    height: 170px;
+  }
+  .studio-app .studio-review-lead h2 {
+    font-size: 26px;
+  }
+}

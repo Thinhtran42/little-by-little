@@ -113,6 +113,7 @@ export function VoiceRecorder() {
 }
 
 export default function StudySession({
+  illustration,
   items,
   mode,
   data,
@@ -264,7 +265,7 @@ export default function StudySession({
               <i style={{ width: `${(index / queue.length) * 100}%` }} />
             </div>
             {stage === "preview" ? (
-              <ContextPractice key={index} phrase={p} speak={speak} onReady={() => { setStage('test'); window.speechSynthesis?.cancel(); }} />
+              <ContextPractice key={index} phrase={p} speak={speak} illustration={illustration} onReady={() => { setStage('test'); window.speechSynthesis?.cancel(); }} />
             ) : stage === "legacy-preview" ? (
               <>
                 <div className="flashcard">

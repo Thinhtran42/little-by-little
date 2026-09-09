@@ -3,7 +3,8 @@ import { PGlite } from "@electric-sql/pglite";
 /** Local development adapter, same PostgreSQL dialect. */
 export async function connectPglite({ dataDir }) {
   if (dataDir !== "memory://") await mkdir(dataDir, { recursive: true });
-  const db = new PGlite(dataDir);
+  // Keep SQL DATE values calendar-only, matching the PostgreSQL adapter.
+  const db = new PGlite(dataDir, { parsers: { 1082: (value) => value } });
   await db.waitReady;
   return {
     kind: "pglite-development",

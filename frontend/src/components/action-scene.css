@@ -1,0 +1,251 @@
+.action-scene {
+  color: #23384e;
+  background: #fffaf0;
+  border: 1px solid #cecdbd;
+  border-radius: 18px;
+  padding: 18px;
+  overflow: hidden;
+}
+.action-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  margin-bottom: 15px;
+  color: #526273;
+}
+.action-art {
+  width: 100%;
+  display: block;
+}
+.action-moving {
+  transform-box: view-box;
+}
+.action-cafe .action-moving {
+  transform-origin: 245px 190px;
+}
+.action-cafe.action-after .action-moving {
+  transform: rotate(-42deg);
+}
+.action-cafe.action-playing .action-moving {
+  animation: action-pickup 2.3s ease-in-out forwards;
+}
+.action-bus.action-after .action-moving {
+  transform: translate(111px, 36px);
+}
+.action-bus.action-playing .action-moving {
+  animation: action-stepoff 2.5s ease-in-out forwards;
+}
+.action-bus.action-playing .action-leg-one {
+  transform-origin: 270px 178px;
+  animation: action-step 0.6s ease-in-out 4 alternate;
+}
+.action-bus.action-playing .action-leg-two {
+  transform-origin: 288px 178px;
+  animation: action-step 0.6s ease-in-out 4 alternate-reverse;
+}
+.action-timeline {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+.action-timeline > span {
+  height: 1px;
+  background: #b9c5c9;
+  flex: 1;
+}
+.action-timeline button {
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid #a5b5b8;
+  border-radius: 24px;
+  background: none;
+  font-size: 11px;
+}
+.action-timeline button[aria-pressed="true"] {
+  background: #263b54;
+  color: #fff;
+}
+.action-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+.action-controls > p {
+  font-size: 11px;
+  line-height: 1.7;
+}
+.action-play {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  background: #315ace;
+  color: #fff !important;
+  border: 0;
+  border-radius: 24px;
+  padding: 11px 13px;
+  min-height: 44px;
+  white-space: nowrap;
+  font-size: 11px !important;
+}
+.action-explanation {
+  border-top: 1px solid #ded6c5;
+  margin-top: 18px;
+  padding-top: 16px;
+}
+.action-explanation h3 {
+  font:
+    28px Georgia,
+    serif;
+  margin: 0 0 10px;
+}
+.action-explanation h3 small {
+  display: block;
+  font:
+    11px "Be Vietnam Pro",
+    sans-serif;
+  color: #526273;
+  margin-top: 8px;
+}
+.action-explanation > p {
+  font:
+    17px/1.7 Georgia,
+    serif;
+}
+.action-quiz-toggle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: none;
+  border: 0;
+  padding: 12px 0;
+  min-height: 44px;
+  font-size: 11px !important;
+}
+.action-static-note {
+  font-size: 10px;
+  color: #526273;
+  line-height: 1.7;
+  margin-top: 10px;
+}
+.action-quiz {
+  border-top: 1px solid #ded6c5;
+  padding-top: 18px;
+  margin-top: 16px;
+}
+.action-quiz label {
+  font: 18px/1.7 Georgia;
+}
+.action-quiz input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #aab5bd;
+  border-radius: 7px;
+  font:
+    14px "Be Vietnam Pro",
+    sans-serif;
+  margin: 14px 0;
+}
+.action-quiz > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.action-quiz button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 0;
+  min-height: 44px;
+  font-size: 11px;
+}
+.action-quiz > small {
+  display: block;
+  font-size: 9px;
+  line-height: 1.7;
+  margin-top: 10px;
+  color: #526273;
+}
+.action-quiz > p {
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 12px;
+  padding: 13px;
+  border-radius: 8px;
+}
+.action-correct {
+  background: #e1ebd8;
+}
+.action-retry {
+  background: #f4e4d7;
+}
+.fn-stage > .action-scene {
+  transform: rotate(-1deg);
+}
+@keyframes action-pickup {
+  0%,
+  18% {
+    transform: rotate(0);
+  }
+  75%,
+  100% {
+    transform: rotate(-42deg);
+  }
+}
+@keyframes action-stepoff {
+  0%,
+  15% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(42px, 10px);
+  }
+  80%,
+  100% {
+    transform: translate(111px, 36px);
+  }
+}
+@keyframes action-step {
+  from {
+    transform: rotate(-12deg);
+  }
+  to {
+    transform: rotate(12deg);
+  }
+}
+.fn-still .action-moving,
+.fn-still .action-leg-one,
+.fn-still .action-leg-two {
+  animation: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .action-scene * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (max-width: 620px) {
+  .action-scene {
+    padding: 13px;
+  }
+  .action-controls {
+    gap: 10px;
+  }
+  .action-controls > p {
+    font-size: 10px;
+  }
+  .action-play {
+    font-size: 10px !important;
+    padding: 10px;
+  }
+  .action-heading {
+    font-size: 8px;
+  }
+}

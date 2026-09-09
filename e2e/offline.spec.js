@@ -1,3 +1,4 @@
+import { prepareRecall } from './helpers/study.js';
 import { test, expect } from "@playwright/test";
 test("production cache supports offline reload, navigation and learning", async ({
   page,
@@ -12,7 +13,7 @@ test("production cache supports offline reload, navigation and learning", async 
     .toBe(true);
   await context.setOffline(true);
   await page.reload();
-  await expect(page.getByRole("heading", { name: /Chào bạn/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Một chút hôm nay/ })).toBeVisible();
   await expect(
     page.getByText("Bạn đang ngoại tuyến.", { exact: false }),
   ).toBeVisible();
@@ -22,7 +23,7 @@ test("production cache supports offline reload, navigation and learning", async 
   await page
     .getByRole("button", { name: "Bắt đầu buổi học", exact: true })
     .click();
-  await page.getByRole("button", { name: "Sẵn sàng thử nhớ" }).click();
+  await prepareRecall(page, "How's your day going?");
   await page.getByLabel("Câu trả lời tiếng Anh").fill("How's your day going?");
   await page.getByRole("button", { name: "Kiểm tra", exact: true }).click();
   await expect(page.getByRole("dialog")).toContainText("Chính xác");

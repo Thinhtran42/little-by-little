@@ -12,7 +12,7 @@ const scenes = {
   friends: ['Gặp gỡ bạn bè', 'Bạn trò chuyện với một người bạn.', Users],
 };
 
-export default function ContextPractice({ phrase: p, speak, onReady }) {
+export default function ContextPractice({ phrase: p, speak, onReady, illustration: Scene }) {
   const [step, setStep] = useState('card');
   const [flipped, setFlipped] = useState(false);
   const [picked, setPicked] = useState([]);
@@ -23,12 +23,12 @@ export default function ContextPractice({ phrase: p, speak, onReady }) {
   const answer = picked.map(id => words[id]).join(' ');
   const correct = answer === p.en;
   return <div className="context-practice">
-    <div className="scene-art" role="img" aria-label={title}>
+    {Scene ? <div className="studio-context-scene"><Scene topic={p.topic} title={title}/></div> : <div className="scene-art" role="img" aria-label={title}>
       <span className="scene-sun" /><span className="scene-window" />
       <Illustration size={76} strokeWidth={1.3} />
       <span className="scene-bubble">Let's talk!</span>
       <span className="scene-caption">{title}</span>
-    </div>
+    </div>}
     <div className="practice-path"><span className={step === 'card' ? 'current' : ''}>01 · Khám phá</span><span className={step === 'build' ? 'current' : ''}>02 · Xếp câu</span><span>03 · Tự nhớ</span></div>
     <p className="context-note">{context} Chủ đề minh họa; hãy xem ghi chú để hiểu cách dùng riêng của mẫu câu.</p>
     {step === 'card' ? <>

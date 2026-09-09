@@ -1,3 +1,4 @@
+import { prepareRecall } from './helpers/study.js';
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { phrases } from "../shared/catalog.js";
@@ -20,8 +21,7 @@ test("personalized onboarding, active recall, and persistence", async ({
   for (const p of phrases
     .filter((p) => p.topic === "travel" && p.type === "sentence")
     .slice(0, 5)) {
-    await expect(page.getByRole("dialog")).toContainText(p.en);
-    await page.getByRole("button", { name: "Sẵn sàng thử nhớ" }).click();
+    await prepareRecall(page, p.en);
     await expect(
       page.getByRole("dialog").getByText(p.en, { exact: true }),
     ).toHaveCount(0);
@@ -52,11 +52,11 @@ test("incorrect recall gives feedback, queues one retry, and records mistake", a
 }) => {
   await page.goto("/#topics");
   await page.getByRole("button", { name: /Cuộc sống hằng ngày/ }).click();
-  await expect(page.locator(".phrase")).toHaveCount(40);
+  await expect(page.locator(".studio-phrase")).toHaveCount(12);
   await page
     .getByRole("button", { name: "Luyện How's your day going?", exact: true })
     .click();
-  await page.getByRole("button", { name: "Sẵn sàng thử nhớ" }).click();
+  await prepareRecall(page, "How's your day going?");
   await page.getByLabel("Câu trả lời tiếng Anh").fill("incorrect sentence");
   await page.getByRole("button", { name: "Kiểm tra", exact: true }).click();
   await expect(page.getByRole("dialog")).toContainText("Chưa khớp");
@@ -95,18 +95,19 @@ test("scenario choices have feedback and persist score", async ({ page }) => {
   ).toContainText("3/3");
 });
 test("bookmarks, search, and lesson path", async ({ page }) => {
-  await page.goto("/#phrasal");
-  await expect(page.locator(".phrase")).toHaveCount(128);
+  await page.goto("/#topics");
+  await page.getByRole("button", { name: /Cuộc sống hằng ngày/ }).click();
+  await expect(page.locator(".studio-phrase")).toHaveCount(12);
   await page.getByRole("textbox").fill("thức dậy");
-  await expect(page.locator(".phrase")).toHaveCount(1);
+  await expect(page.locator(".studio-phrase")).toHaveCount(1);
   await page.getByRole("button", { name: "Lưu wake up", exact: true }).click();
   await page.getByRole("button", { name: /Câu đã lưu/ }).click();
-  await expect(page.locator(".phrase")).toHaveCount(1);
+  await expect(page.locator(".studio-phrase")).toHaveCount(1);
   await page.reload();
-  await expect(page.locator(".phrase")).toHaveCount(1);
+  await expect(page.locator(".studio-phrase")).toHaveCount(1);
   await page.getByRole("button", { name: "Lộ trình", exact: true }).click();
-  await expect(page.locator(".lesson")).toHaveCount(128);
-  await page.locator(".lesson").first().click();
+  await expect(page.locator(".studio-path-list > button")).toHaveCount(8);
+  await page.locator(".studio-path-list > button").first().click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toHaveCount(0);
@@ -151,7 +152,7 @@ test("export/import validates data and never silently replaces progress", async 
   await expect(page.getByRole("dialog")).toContainText("1 câu đã xem");
   await page.getByRole("dialog").getByRole("button", { name: "Khôi phục", exact: true }).click();
   await page.getByRole("button", { name: /Câu đã lưu/ }).click();
-  await expect(page.locator(".phrase")).toHaveCount(1);
+  await expect(page.locator(".studio-phrase")).toHaveCount(1);
 });
 test("mobile and desktop surfaces stay within viewport", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -194,10 +195,10 @@ test("core accessibility semantics and focus containment", async ({ page }) => {
 test("mobile more menu exposes all learning surfaces", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await page.getByRole("button", { name: "Thêm", exact: true }).click();
+  await page.getByRole("button", { name: "Mở menu", exact: true }).click();
   await page.getByRole("button", { name: "Lộ trình", exact: true }).click();
-  await expect(page.locator(".lesson")).toHaveCount(128);
-  await expect(page.locator(".mobile-extra-nav")).toHaveCount(0);
+  await expect(page.locator(".studio-path-list > button")).toHaveCount(8);
+  await expect(page.getByRole("button", {name:"Mở menu"})).toHaveAttribute("aria-expanded","false");
 });
 test("microphone recording is local and stops when the dialogue closes", async ({
   page,

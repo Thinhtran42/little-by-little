@@ -57,3 +57,56 @@ Không coi mở đáp án hoặc kết quả ngay sau khi học là nhớ vững
 - Máy chưa có gcloud trên PATH, chưa có ADC ở vị trí mặc định, chưa đặt GOOGLE_APPLICATION_CREDENTIALS hoặc GOOGLE_CLOUD_PROJECT. Cần người dùng bật API/billing, cung cấp Project ID (không phải tên hiển thị) và đăng nhập ADC trước khi sinh audio.
 - OAuth client đăng nhập Google của ứng dụng không thay thế quyền TTS. Không đưa credentials vào repo/chat.
 - `docs/AUDIO-PLAN.md` lưu phương án. Player mới chưa tích hợp; app hiện vẫn dùng speechSynthesis. Sau khi có quyền: tạo clip, nghe kiểm tra, tích hợp chọn giọng/phân vai, kiểm tra local trước deploy.
+
+## Mốc Field Notes — bản thử local theo yêu cầu mới
+
+- Các thay đổi station/UI trước đó đã nằm trong commit d6eb5c7 trên main; ghi chú “chưa push” ở mốc cũ không còn áp dụng cho commit đó.
+- Người dùng yêu cầu nâng bank từ/phrasal/mẫu câu và trùng tu UI nhưng phải thử local trước khi áp dụng. Không push/deploy bản thử này.
+- URL `http://localhost:5173/?preview=field-notes`, về bản gốc bằng `/`. main.jsx chỉ lazy-load preview trong DEV; production loại mã preview.
+- `shared/field-notes.js`: 6 tình huống, 36 mục có ví dụ/nghĩa/lỗi dễ nhầm, 6 đoạn đọc, 6 hội thoại (36 lượt). Nội dung tách khỏi catalog 640 mục và chưa publish vào database.
+- `FieldNotesPreview.jsx` + `field-notes.css`: phong cách sổ tay, 6 minh họa SVG local, search/filter, flashcard, bài điền, ghi đúng/sai/gợi ý và ngày ôn local, reduced motion, nút về UI hiện tại.
+- Giới hạn: progress preview chỉ localStorage riêng; chưa server sync, chưa SRS thích nghi, chưa bài vận dụng câu tự do, chưa audio tự nhiên. Không báo đã hoàn thành các phần này.
+- Test: 14 unit pass, 3 Playwright pass; build production pass. Đã xem ảnh desktop/mobile và chỉnh CSS nav ảnh hưởng từ giao diện cũ.
+- Dev chạy lại với DATABASE_URL rỗng + DB_DRIVER=pglite; ports 3001/5173. Không sửa .env hoặc dùng production DB.
+- Chi tiết thiết kế, đường dẫn, kiểm thử và thứ tự triển khai tiếp trong `docs/FIELD-NOTES-PREVIEW.md`.
+
+## Studio v2 (09/09/2026)
+
+- Người dùng muốn wow hơn và hỏi nghiên cứu màu. Đã tra nguồn Elliot 2015, nghiên cứu signaling, WCAG; ghi rõ bằng chứng và giới hạn trong FIELD-NOTES-PREVIEW.md.
+- Preview mặc định Studio, nút chuyển về Sổ tay; vẫn chỉ DEV, chưa push/deploy.
+- Hero có 3 cụm bấm chọn, pin chỉ vị trí, nghĩa/câu ví dụ + loa; màu kem/xanh mực/cobalt/vàng, khung cảnh có chiều sâu, animation ngắn. Motion có nút giảm và tôn trọng prefers-reduced-motion. Giọng vẫn từ thiết bị.
+- Đã xem ảnh desktop và kiểm tra responsive; cặp chữ chính/phụ/nút/highlight có contrast >4.5:1. Đây không phải audit toàn bộ accessibility.
+- Kiểm tra cuối: 4/4 Playwright pass, gồm đổi cụm trong cảnh, Studio/Sổ tay, reduced-motion, học/lưu kết quả, 390px/1440px và về UI gốc.
+
+## Action scenes v3 — 09/09/2026
+
+- Đã triển khai theo đồng ý của user: `ActionScene.jsx`/`action-scene.css` cho pick it up (nhấc cốc) và get off (bước khỏi xe). Tích hợp vào story cafe/bus và chip pick it up trên hero.
+- Có phát lại, trạng thái Trước/Sau, xử lý reduced-motion và thử điền cụm với giải thích. Mini quiz không cộng progress, không gọi server/TTS API. Vẫn DEV preview tại `/?preview=field-notes`, UI production giữ nguyên.
+- 5/5 Playwright qua; test bổ sung kiểm tra cả hai animation hoàn tất cũng qua. Xem ảnh trạng thái sau ở artifacts/action-cafe-after.png và action-bus-after.png; bố cục/động tác hợp lý.
+- Không push/deploy. Bước tiếp: nhận phản hồi local; nếu duyệt mới mở rộng các động tác cho put away/try on/call off và nối kết quả vào backend theo kế hoạch.
+
+## Bàn giao redesign toàn app cho model nhỏ — 09/09/2026
+
+- Người dùng đã đồng ý hướng Studio và yêu cầu file MD chi tiết để model nhỏ triển khai, model chính kiểm tra sau.
+- Tài liệu chính: `docs/STUDIO-REDESIGN-HANDOFF.md`. Gồm source map, invariants, token/motion, từng màn, kiến trúc DEV preview App thật, đợt 0–8, test matrix, mẫu progress và prompt cho implementer/reviewer.
+- Giao diện full Studio CHƯA được triển khai. Đợt đầu cần baseline và inventory; prototype hiện có không thay thế catalog/account thật.
+- URL đề xuất cho full app thử: `/?preview=studio-full`; chưa tồn tại ở thời điểm viết tài liệu. `/` và `/?preview=field-notes` giữ nguyên.
+- Chưa tạo progress thực thi hoặc đánh dấu bất kỳ đợt full redesign DONE. Không push/deploy.
+
+## Full Studio local đã triển khai — 09/09/2026
+
+- User yêu cầu bắt đầu nâng cấp toàn giao diện trước; mở rộng vocabulary/đoạn đọc và nghiên cứu nguồn dữ liệu để sau. Phần ghi CHƯA triển khai ở mục trước đã được thay thế bởi trạng thái này.
+- Có `http://localhost:5173/?preview=studio-full`, dùng controller/callback/catalog/progress thật từ App. `/` giữ UI hiện hành. Studio chỉ DEV, chưa push/deploy.
+- Đã làm shell/mobile, home gọn, chủ đề có SVG, thư viện/search/saved chia nhóm, phrasal theo tình huống, path chọn từng topic, review lượt tối đa 10; đồng bộ presentation study/practice/insights/account.
+- Tách `components/studio/` và `FieldScene.jsx`; truyền illustration tùy chọn vào ContextPractice/PhrasalStories, giữ luồng chấm và sync cũ.
+- Fix adapter PGlite DATE trả timestamp khác PostgreSQL; thêm regression. Cập nhật E2E stale sang luồng lật thẻ → xếp câu → tự nhớ. Cloud regression chạy cả hai UI.
+- Kiểm tra: 14 unit, 21 API, 21 E2E pass; build pass; offline production hiện hành 1/1. Xem chi tiết và giới hạn tại `docs/STUDIO-REDESIGN-PROGRESS.md`.
+- Local đang chạy PGlite qua env terminal do Postgres local chưa chạy; không sửa `.env`/bí mật. Dev frontend 5173/API 3001.
+- Tiếp theo: user review local; hoàn thiện feedback rồi mới quyết định áp dụng production. Chưa làm content expansion, paid audio, hay rewrite thuật toán học.
+
+## Studio trở thành giao diện chính — 09/09/2026
+
+- User đã duyệt và yêu cầu thay UI cũ, kiểm tra rồi push GitHub.
+- App hiện render Studio trên `/` cả dev/production. Bỏ legacy JSX và TopicCard khỏi main; giữ controller, providers và stylesheet nền còn được các component dùng. Bỏ nhãn xem thử/link UI cũ.
+- Cập nhật regression theo thư viện phân trang/lộ trình một chủ đề/mobile menu mới. 21 E2E pass; build và offline production Studio pass; npm audit production 0 vulnerabilities.
+- Prototype field-notes chỉ DEV, không vào production bundle. Mở rộng nội dung và TTS tính phí vẫn nằm ngoài đợt này.
