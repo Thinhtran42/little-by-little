@@ -1,10 +1,14 @@
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
-import react from '@vitejs/plugin-react';
-import {fileURLToPath} from 'node:url';
+import react from "@vitejs/plugin-react";
+import { fileURLToPath } from "node:url";
 export default defineConfig({
-  root:fileURLToPath(new URL('.',import.meta.url)),
-  server:{port:5173,strictPort:true,proxy:{'/api':{target:'http://127.0.0.1:3001',changeOrigin:false}}},
+  root: fileURLToPath(new URL(".", import.meta.url)),
+  server: {
+    port: 5173,
+    strictPort: true,
+    proxy: { "/api": { target: "http://127.0.0.1:3001", changeOrigin: false } },
+  },
   plugins: [
     react(),
     VitePWA({
@@ -36,13 +40,13 @@ export default defineConfig({
       },
       workbox: {
         clientsClaim: true,
-        globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
+        globPatterns: ["**/*.{js,css,html,svg,png,webp,woff2}"],
         navigateFallback: "index.html",
-        navigateFallbackDenylist:[/^\/api\//],
+        navigateFallbackDenylist: [/^\/api\//],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
       },
       devOptions: { enabled: false },
     }),
   ],
-  build: { sourcemap: false,outDir:'../dist',emptyOutDir:true },
+  build: { sourcemap: false, outDir: "../dist", emptyOutDir: true },
 });

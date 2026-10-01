@@ -1,0 +1,407 @@
+import { phrasalExpansion } from "./phrasal-expansion.js";
+// Original, situation-first material. IDs and assessment versions are persistent contracts.
+// Each entry teaches one sense; labels are editorial difficulty, not CEFR certification.
+const term = (en, vi, pattern, example, mistake, prompt) => ({
+  en,
+  vi,
+  pattern,
+  example,
+  mistake,
+  prompt,
+});
+export const phrasalLessons = [
+  {
+    id: "pv-kitchen",
+    version: 1,
+    group: "daily",
+    level: "A2–B1",
+    title: "Dọn bếp cùng nhau",
+    scene: "pv-dishes",
+    subtitle: "Bữa tối đã xong. Chia nhau bốn việc nhỏ để căn bếp gọn lại.",
+    goal: "Nhờ ai rửa bát, cất đồ và xử lý thức ăn thừa.",
+    caption:
+      "Wash up: nhìn hành động rửa chiếc đĩa dưới vòi nước. Sau đó mới lau khô và put away — cất vào chỗ.",
+    story:
+      "Dinner is over, but the kitchen is still a mess. We need to **clean up** before our guests arrive. I offer to **wash up** while Linh dries the plates. Then we **put away** the clean dishes. There is some soup left, so we save it for lunch. We only **throw away** the empty packaging. Ten minutes later, the kitchen is ready for tea.",
+    translation:
+      "Bữa tối đã xong nhưng bếp còn bừa bộn. Chúng tôi cần dọn trước khi khách đến. Tôi rửa bát còn Linh lau khô, rồi cả hai cất bát đĩa. Súp còn lại được giữ cho bữa trưa; chúng tôi chỉ vứt bao bì rỗng. Mười phút sau, bếp đã sẵn sàng để pha trà.",
+    dialogue: [
+      ["Linh", "Could you wash up while I clear the table?"],
+      ["Mai", "Sure. Where do these plates go?"],
+      ["Linh", "In that cupboard. I can put them away."],
+      ["Mai", "Should I throw away this soup?"],
+      ["Linh", "No, let’s save it for tomorrow."],
+      ["Mai", "Good idea. We can clean up the rest together."],
+    ],
+    terms: [
+      term(
+        "clean up",
+        "dọn sạch",
+        "clean up the kitchen / clean it up",
+        "Let’s clean it up before dinner.",
+        "Với it: clean it up, không phải clean up it.",
+        "The guests arrive soon. Let’s ___ the kitchen. (dọn sạch)",
+      ),
+      term(
+        "wash up",
+        "rửa bát đĩa",
+        "wash up / wash the dishes",
+        "I’ll wash up after lunch.",
+        "Nghĩa rửa bát thường dùng trong Anh-Anh; Anh-Mỹ hay dùng do the dishes.",
+        "I cooked dinner. Could you ___? (rửa bát, Anh-Anh)",
+      ),
+      term(
+        "put away",
+        "cất vào chỗ",
+        "put away the plates / put them away",
+        "Please put them away in the cupboard.",
+        "Away ở đây gắn với cất đồ; put off lại là trì hoãn.",
+        "The cups are dry. Please ___ the cups. (cất vào chỗ)",
+      ),
+      term(
+        "throw away",
+        "vứt bỏ",
+        "throw away the packaging / throw it away",
+        "Don’t throw it away; we can reuse it.",
+        "Với đại từ: throw it away, không đặt it sau away.",
+        "This carton is damaged. We need to ___ the carton. (vứt bỏ)",
+      ),
+    ],
+    order: ["Please", "put", "them", "away"],
+    orderHint: "Nhờ cất chúng đi. Đặt them đúng chỗ.",
+  },
+  {
+    id: "pv-team",
+    version: 1,
+    group: "work",
+    level: "B1–B2",
+    title: "Cuộc họp có một trục trặc",
+    scene: "work",
+    subtitle:
+      "Bản demo bị lỗi. Cả nhóm biến một vấn đề thành các bước rõ ràng.",
+    goal: "Nêu vấn đề, ghi lại đề xuất và tổ chức bước tiếp theo.",
+    caption:
+      "Một bàn họp, một vấn đề chung: dùng lời nói để thống nhất hành động.",
+    story:
+      "We have ten minutes before the demo. I **bring up** a problem with the login screen. Nobody knows the cause yet, so we agree to **look into** it after the meeting. For today, we can use a recorded demo instead. I **write down** the plan while Sam contacts the client. We also **set up** a short call for tomorrow to share what we find.",
+    translation:
+      "Chỉ còn mười phút trước buổi demo. Tôi nêu vấn đề ở màn hình đăng nhập. Chưa ai biết nguyên nhân nên cả nhóm thống nhất tìm hiểu sau cuộc họp. Hôm nay có thể dùng video demo. Tôi ghi lại kế hoạch, Sam liên hệ khách hàng. Chúng tôi sắp xếp cuộc gọi ngắn ngày mai để báo kết quả.",
+    dialogue: [
+      ["Sam", "Is there anything else we need to discuss?"],
+      ["Mai", "Yes. Can I bring up the login problem?"],
+      ["Sam", "Of course. Who can look into it?"],
+      ["Mai", "I can. Could you write down the error message?"],
+      ["Sam", "Done. Shall we set up a call tomorrow?"],
+      ["Mai", "Yes. By then, I should know more."],
+    ],
+    terms: [
+      term(
+        "bring up",
+        "đề cập một vấn đề",
+        "bring up a problem / bring it up",
+        "Can I bring it up at the meeting?",
+        "Nghĩa trong bài là đề cập, không phải nuôi dạy con.",
+        "There is one more issue. May I ___ the issue now? (đề cập)",
+      ),
+      term(
+        "look into",
+        "tìm hiểu, điều tra",
+        "look into the issue / look into it",
+        "We need to look into it.",
+        "Không tách: look into it, không nói look it into.",
+        "Nobody knows why it failed. We will ___ the problem. (điều tra)",
+      ),
+      term(
+        "write down",
+        "ghi lại",
+        "write down a number / write it down",
+        "Write it down so you don’t forget.",
+        "Down không phải hướng đi trong nghĩa này; cả cụm là ghi lại.",
+        "That code is important. Please ___ the code. (ghi lại)",
+      ),
+      term(
+        "set up",
+        "sắp xếp, tổ chức",
+        "set up a meeting / set it up",
+        "I can set it up for Tuesday.",
+        "Trong bài là tổ chức cuộc họp; cụm còn có nghĩa thiết lập thiết bị.",
+        "We need everyone’s input. Let’s ___ a meeting. (tổ chức)",
+      ),
+    ],
+    order: ["We", "will", "look", "into", "it"],
+    orderHint: "Chúng tôi sẽ tìm hiểu việc đó. Look into không tách.",
+  },
+  {
+    id: "pv-hotel",
+    version: 1,
+    group: "travel",
+    level: "A2–B1",
+    title: "Một đêm ở thành phố mới",
+    scene: "hotel",
+    subtitle: "Đến khách sạn, khám phá khu phố rồi chuẩn bị trả phòng.",
+    goal: "Kể lịch trình ngắn từ lúc khởi hành đến lúc rời khách sạn.",
+    caption:
+      "Quầy lễ tân là điểm neo cho check in và check out — hai hành động đối nhau.",
+    story:
+      "We **set off** just after breakfast and reach the city at noon. Our room is ready, so we **check in** straight away. The receptionist gives us a map. We leave our bags upstairs and **look around** the neighbourhood on foot. There is a market near the river and a quiet café behind the hotel. Tomorrow, we need to **check out** by eleven, but we can leave our bags at reception until our train departs.",
+    translation:
+      "Chúng tôi khởi hành sau bữa sáng, tới thành phố lúc trưa và nhận phòng ngay vì phòng đã sẵn sàng. Lễ tân đưa bản đồ. Chúng tôi để hành lý rồi đi bộ khám phá khu phố. Gần sông có chợ, sau khách sạn có quán cà phê yên tĩnh. Ngày mai phải trả phòng trước mười một giờ, nhưng có thể gửi hành lý ở lễ tân đến lúc tàu chạy.",
+    dialogue: [
+      ["Guest", "Hello. Can we check in now?"],
+      ["Receptionist", "Yes. May I see your ID, please?"],
+      ["Guest", "Of course. We’d like to look around this afternoon."],
+      ["Receptionist", "The riverside is lovely. Here’s a map."],
+      ["Guest", "What time do we need to check out tomorrow?"],
+      ["Receptionist", "By eleven. You can leave your bags here."],
+    ],
+    terms: [
+      term(
+        "set off",
+        "khởi hành",
+        "set off at six / set off for Hanoi",
+        "We set off before sunrise.",
+        "Ở nghĩa khởi hành không cần tân ngữ; khác set off an alarm.",
+        "To miss the traffic, we should ___ at six. (khởi hành)",
+      ),
+      term(
+        "check in",
+        "làm thủ tục nhận phòng",
+        "check in at a hotel",
+        "We can check in after two.",
+        "Check-in có dấu nối có thể là danh từ; động từ viết check in.",
+        "Our room is ready. Let’s ___ at reception. (nhận phòng)",
+      ),
+      term(
+        "look around",
+        "đi xem, khám phá xung quanh",
+        "look around / look around the town",
+        "We have an hour to look around.",
+        "Trong bài là khám phá địa điểm, không phải tìm một vật bị mất.",
+        "We have a free afternoon to ___ the old town. (khám phá)",
+      ),
+      term(
+        "check out",
+        "làm thủ tục trả phòng",
+        "check out of the hotel",
+        "We must check out by eleven.",
+        "Ở đây là trả phòng; check something out còn có nghĩa xem thử.",
+        "We are leaving today. We need to ___ before eleven. (trả phòng)",
+      ),
+    ],
+    order: ["We", "check", "out", "at", "eleven"],
+    orderHint: "Chúng tôi trả phòng lúc mười một giờ.",
+  },
+  {
+    id: "pv-clothes",
+    version: 1,
+    group: "daily",
+    level: "A2–B1",
+    title: "Chiếc áo có vừa không?",
+    scene: "pv-fitting",
+    subtitle: "Thử đồ, chọn kích cỡ và quyết định giữ hay trả lại.",
+    goal: "Dùng đại từ đúng chỗ khi nói về một món đồ.",
+    caption:
+      "Chọn trang phục trước gương: pick out là chọn ra; try on là mặc thử để kiểm tra độ vừa.",
+    story:
+      "I need a jacket for a trip, so my sister helps me **pick out** a light one. The colour is nice, but I want to **try on** the jacket before buying it. I **take off** my coat and step into the fitting room. The sleeves feel a little long. The assistant says I can **take back** the jacket within fourteen days if I keep the receipt. I decide to try a smaller size first.",
+    translation:
+      "Tôi cần áo khoác cho chuyến đi nên chị giúp chọn một chiếc nhẹ. Màu đẹp nhưng tôi muốn thử trước. Tôi cởi áo đang mặc rồi vào phòng thử. Tay áo hơi dài. Nhân viên nói có thể mang trả trong mười bốn ngày nếu giữ hóa đơn. Tôi quyết định thử cỡ nhỏ hơn trước.",
+    dialogue: [
+      ["Assistant", "Can I help you pick out a jacket?"],
+      ["Customer", "Yes. Can I try this one on?"],
+      ["Assistant", "Of course. The fitting room is over there."],
+      ["Customer", "I’ll take off my coat first."],
+      ["Customer", "If it doesn’t fit, can I take it back?"],
+      ["Assistant", "Yes, with the receipt and the tags attached."],
+    ],
+    terms: [
+      term(
+        "pick out",
+        "chọn ra",
+        "pick out a jacket / pick it out",
+        "She helped me pick it out.",
+        "Nghĩa đang học là chọn trong nhiều món; khác pick up: nhặt/đón.",
+        "Can you help me ___ a jacket? (chọn ra)",
+      ),
+      term(
+        "try on",
+        "mặc thử",
+        "try on a jacket / try it on",
+        "Can I try it on?",
+        "Với it phải đặt ở giữa: try it on.",
+        "Before buying it, I want to ___ this jacket. (mặc thử)",
+      ),
+      term(
+        "take off",
+        "cởi ra",
+        "take off your coat / take it off",
+        "It’s warm inside. Take it off.",
+        "Nghĩa ở đây là cởi đồ, không phải máy bay cất cánh.",
+        "It is hot here. You can ___ your coat. (cởi ra)",
+      ),
+      term(
+        "take back",
+        "mang trả lại",
+        "take back the jacket / take it back",
+        "Keep the receipt if you want to take it back.",
+        "Ở cửa hàng là mang món đồ trả lại; chính sách tùy cửa hàng.",
+        "The zip is broken. I need to ___ this jacket. (mang trả)",
+      ),
+    ],
+    order: ["Can", "I", "try", "it", "on"],
+    orderHint: "Tôi có thể mặc thử nó không? Đặt it đúng chỗ.",
+  },
+  {
+    id: "pv-friends",
+    version: 1,
+    group: "people",
+    level: "B1",
+    title: "Lâu rồi mới gặp",
+    scene: "friends",
+    subtitle: "Một lời rủ cà phê sau tuần làm việc không mấy suôn sẻ.",
+    goal: "Hẹn bạn và hỏi thăm mà không nói như sách giáo khoa.",
+    caption:
+      "Hai người bên bàn cà phê: catch up là cập nhật chuyện của nhau, không phải chạy đuổi.",
+    story:
+      "Nina has had a difficult week. I ask if she wants to **meet up** for coffee on Saturday. We have not talked properly for a month, so it will be good to **catch up**. She is tired and does not want a busy afternoon. That is fine; we can just **hang out** at a quiet café. I hope some company will help her **cheer up**, but I let her decide whether she wants to talk about work.",
+    translation:
+      "Nina vừa trải qua một tuần khó khăn. Tôi rủ bạn gặp uống cà phê thứ Bảy. Đã một tháng chưa trò chuyện nên đây là dịp hỏi thăm nhau. Bạn mệt và không muốn lịch trình bận rộn. Chúng tôi có thể thư giãn ở quán yên tĩnh. Tôi hy vọng có người bên cạnh sẽ giúp bạn vui hơn, nhưng để bạn tự quyết có muốn nói về công việc không.",
+    dialogue: [
+      ["Mai", "Want to meet up on Saturday?"],
+      ["Nina", "Yes. It would be nice to catch up."],
+      ["Mai", "We can just hang out at that little café."],
+      ["Nina", "That sounds good. I’ve had a rough week."],
+      ["Mai", "Would you like to talk about it?"],
+      ["Nina", "Maybe later. A coffee might help me cheer up first."],
+    ],
+    terms: [
+      term(
+        "meet up",
+        "gặp nhau theo hẹn",
+        "meet up with a friend",
+        "Let’s meet up after work.",
+        "Meet up thường thân mật; thêm with trước người mình gặp.",
+        "Are you free to ___ with us on Sunday? (gặp nhau)",
+      ),
+      term(
+        "catch up",
+        "hỏi thăm chuyện gần đây",
+        "catch up with someone / catch up over coffee",
+        "Let’s catch up over lunch.",
+        "Nghĩa ở đây là trò chuyện cập nhật; catch up on work là làm bù việc.",
+        "We haven’t talked for ages. Let’s ___ over coffee. (hỏi thăm)",
+      ),
+      term(
+        "hang out",
+        "dành thời gian thư giãn",
+        "hang out with friends / hang out at a café",
+        "We often hang out here.",
+        "Cách nói thân mật, không có nghĩa treo đồ trong bài này.",
+        "We have no plans. We can just ___ at my place. (thư giãn cùng nhau)",
+      ),
+      term(
+        "cheer up",
+        "vui lên",
+        "cheer up / cheer someone up",
+        "A walk might help me cheer up.",
+        "Đừng dùng mệnh lệnh cheer up để gạt đi cảm xúc của người khác.",
+        "A funny film might help me ___. (vui lên)",
+      ),
+    ],
+    order: ["This", "might", "cheer", "her", "up"],
+    orderHint: "Điều này có thể làm cô ấy vui hơn. Đặt her đúng chỗ.",
+  },
+  {
+    id: "pv-tech",
+    version: 1,
+    group: "work",
+    level: "B1",
+    title: "Máy tính chưa chịu chạy",
+    scene: "tech",
+    subtitle: "Kiểm tra thiết bị từng bước trước khi kết luận nó bị hỏng.",
+    goal: "Hướng dẫn thao tác và bảo vệ dữ liệu trước khi sửa máy.",
+    caption:
+      "Bàn sửa máy tính: gắn từng cụm với thao tác kiểm tra nguồn và dữ liệu.",
+    story:
+      "My laptop battery is almost empty. The technician asks me to **plug in** the charger and **turn on** the laptop. It starts, but the screen freezes after a minute. Before doing anything else, we need to **back up** my files to an external drive. Once the copy is complete, she tells me to **shut down** the laptop properly. She will check the hardware while I use a spare computer.",
+    translation:
+      "Pin laptop gần hết. Kỹ thuật viên bảo tôi cắm bộ sạc rồi bật máy. Máy khởi động nhưng màn hình bị đứng sau một phút. Trước khi làm gì khác, chúng tôi cần sao lưu tệp ra ổ ngoài. Sao chép xong, bạn ấy bảo tôi tắt máy đúng cách rồi kiểm tra phần cứng; tôi dùng máy dự phòng.",
+    dialogue: [
+      ["Technician", "Could you plug in the charger?"],
+      ["Customer", "Done. Shall I turn on the laptop?"],
+      ["Technician", "Yes. We need to back up your files first."],
+      ["Customer", "I have an external drive here."],
+      ["Technician", "Great. Once that’s done, shut down the laptop."],
+      ["Customer", "All right. Please let me know what you find."],
+    ],
+    terms: [
+      term(
+        "plug in",
+        "cắm điện, kết nối bằng phích",
+        "plug in the charger / plug it in",
+        "Please plug it in here.",
+        "Plug in khác turn on: cắm điện chưa có nghĩa là bật máy.",
+        "The battery is low. Please ___ the charger. (cắm điện)",
+      ),
+      term(
+        "turn on",
+        "bật thiết bị",
+        "turn on the laptop / turn it on",
+        "Can you turn it on?",
+        "Dùng đại từ ở giữa: turn it on.",
+        "The laptop is off. Please ___ the laptop. (bật)",
+      ),
+      term(
+        "back up",
+        "sao lưu dữ liệu",
+        "back up the files / back them up",
+        "Back them up before making changes.",
+        "Động từ back up gồm hai từ; danh từ backup thường viết liền.",
+        "Before the repair, we should ___ your files. (sao lưu)",
+      ),
+      term(
+        "shut down",
+        "tắt máy, kết thúc hoạt động",
+        "shut down the computer / shut it down",
+        "Save your work, then shut it down.",
+        "Trong bài là tắt máy đúng quy trình; không đồng nghĩa rút điện đột ngột.",
+        "Save the document, then ___ the computer. (tắt máy)",
+      ),
+    ],
+    order: ["Please", "back", "them", "up"],
+    orderHint: "Hãy sao lưu chúng. Đặt them đúng chỗ.",
+  },
+];
+export const phrasalGroups = [
+  { id: "all", label: "Tất cả" },
+  { id: "daily", label: "Đời sống" },
+  { id: "work", label: "Công việc" },
+  { id: "travel", label: "Đi xa" },
+  { id: "people", label: "Bạn bè" },
+  { id: "learning", label: "Học tập" },
+  { id: "health", label: "Sức khỏe & cảm xúc" },
+  { id: "community", label: "Cộng đồng" },
+  { id: "leisure", label: "Giải trí" },
+];
+phrasalLessons.push(...phrasalExpansion);
+for (const lesson of phrasalLessons) {
+  lesson.questions = [
+    ...lesson.terms.map((t, i) => ({
+      id: `recall-${i + 1}`,
+      mode: "recall",
+      prompt: t.prompt,
+      answer: t.en,
+      explanation: t.pattern + ". " + t.mistake,
+    })),
+    {
+      id: "word-order",
+      mode: "choice",
+      prompt: lesson.orderHint,
+      answer: lesson.order.join(" "),
+      explanation:
+        "Cách sắp xếp: " +
+        lesson.order.join(" ") +
+        ". Ghép từ có sẵn là luyện nhận diện, lịch ôn tối đa 1 ngày.",
+    },
+  ];
+}

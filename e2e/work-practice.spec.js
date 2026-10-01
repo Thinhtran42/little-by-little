@@ -1,0 +1,45 @@
+import {test,expect} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import {workLessons} from '../shared/work-course.js';
+
+test('comprehension feedback, listening support and retry do not inflate first-pass results',async({page})=>{
+ await page.goto('/#work-course');
+ await page.locator('.wc-day').first().click();
+ await expect(page.getByRole('button',{name:'Giải thích lựa chọn',exact:true})).toBeDisabled();
+ await page.getByRole('radio',{name:'Alex on the sales team',exact:true}).check();
+ await page.getByRole('button',{name:'Giải thích lựa chọn',exact:true}).click();
+ await expect(page.locator('.wc-understand [role=status]')).toContainText('Cùng xem lại');
+ await expect(page.locator('.wc-understand [role=status]')).toContainText('Linh on the support team');
+ await page.getByRole('button',{name:'Nghe & nhớ câu',exact:true}).click();
+ const phrases=workLessons[0].phrases;
+ await page.getByRole('button',{name:'Xem câu (có hỗ trợ)',exact:true}).click();
+ await page.getByLabel('Câu bạn nghe được',{exact:true}).fill(phrases[0]);
+ await page.getByRole('button',{name:'Đối chiếu câu nghe',exact:true}).click();
+ await expect(page.locator('.wc-listening [role=status]')).toContainText('sau khi xem hỗ trợ');
+ await page.getByRole('button',{name:'Câu nghe tiếp theo',exact:true}).click();
+ await expect(page.locator('.wc-listening .wc-model')).toHaveCount(0);
+ await page.getByLabel('Câu bạn nghe được',{exact:true}).fill('wrong');
+ await page.getByRole('button',{name:'Đối chiếu câu nghe',exact:true}).click();
+ await page.getByRole('button',{name:'Tự diễn đạt',exact:true}).click();
+ await page.getByRole('button',{name:'Nghe & nhớ câu',exact:true}).click();
+ await expect(page.locator('.wc-listening [role=status]')).toContainText('Chưa khớp');
+ await page.getByRole('button',{name:'Câu nghe tiếp theo',exact:true}).click();
+ await page.getByLabel('Câu bạn nghe được',{exact:true}).fill(phrases[2].toUpperCase());
+ await page.getByRole('button',{name:'Đối chiếu câu nghe',exact:true}).click();
+ await page.getByRole('button',{name:'Xem kết quả lượt nghe',exact:true}).click();
+ await expect(page.locator('.wc-listening [role=status]')).toContainText('1/3');
+ await page.getByRole('button',{name:'Luyện riêng 2 câu cần ôn',exact:true}).click();
+ await expect(page.locator('.wc-listening')).toContainText('Câu 1/2');
+ await page.getByLabel('Câu bạn nghe được',{exact:true}).fill(phrases[0]);
+ await page.getByRole('button',{name:'Đối chiếu câu nghe',exact:true}).click();
+ await expect(page.locator('.wc-listening [role=status]')).toContainText('không mở trước');
+});
+for(const width of [390,1440]) test(`listening and comprehension accessible at ${width}`,async({page})=>{
+ await page.setViewportSize({width,height:900});
+ await page.goto('/#work-course');await page.locator('.wc-day').first().click();
+ expect((await new AxeBuilder({page}).include('.wc-understand').withTags(['wcag2a','wcag2aa']).analyze()).violations).toEqual([]);
+ await page.getByRole('button',{name:'Nghe & nhớ câu',exact:true}).click();
+ expect((await new AxeBuilder({page}).include('.work-course').withTags(['wcag2a','wcag2aa']).analyze()).violations).toEqual([]);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+ await page.screenshot({path:`artifacts/work-listening-${width}.png`,fullPage:true});
+});

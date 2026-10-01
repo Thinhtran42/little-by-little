@@ -53,7 +53,7 @@ for (const width of [390, 1440])
       "account",
     ]) {
       await page.goto(`/#${route}`);
-      await expect(page.locator(".studio-heading h1")).toBeVisible();
+      await expect(page.locator(route === 'phrasal' ? '.pv-intro h2' : '.studio-heading h1')).toBeVisible();
       await expect(page.locator(".studio-app")).toBeVisible();
       expect(
         await page.evaluate(
@@ -68,7 +68,8 @@ for (const width of [390, 1440])
     }
     if (width === 390) {
       await page.getByRole("button", { name: "Mở menu" }).click();
-      await page.getByRole("button", { name: "Lộ trình", exact: true }).click();
+      await page.getByRole("button", { name: "Khóa học", exact: true }).click();
+  await page.getByRole("button", { name: "Lộ trình", exact: true }).click();
       await expect(page.locator(".studio-path-list")).toBeVisible();
       await expect(
         page.getByRole("button", { name: "Mở menu" }),

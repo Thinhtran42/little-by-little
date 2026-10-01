@@ -3,6 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 import fs from "node:fs";
 test("collect visual and accessibility evidence", async ({ page }) => {
   await page.goto("/");
+  await page.getByRole("button", { name: "Thư viện", exact: true }).click();
   await page.getByRole("button", { name: "Luyện tập", exact: true }).click();
   await page.screenshot({ path: "artifacts/v3-practice.png", fullPage: true });
   await page.getByRole("button", { name: /Một ly cà phê đúng ý/ }).click();

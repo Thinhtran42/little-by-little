@@ -1,0 +1,312 @@
+.work-course {
+  max-width: 1080px;
+  margin: auto;
+  color: #203b35;
+}
+.work-course p {
+  line-height: 1.8;
+}
+.work-course button {
+  font: inherit;
+  cursor: pointer;
+}
+.work-course button:focus-visible,
+.work-course textarea:focus-visible {
+  outline: 3px solid #ae632e;
+  outline-offset: 4px;
+}
+.wc-intro {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.wc-intro h2 {
+  font-size: 32px;
+  line-height: 1.3;
+}
+.work-course .wc-cover {
+  height: 260px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+.wc-notice {
+  padding: 16px;
+  background: #eaf0e2;
+  border-radius: 10px;
+  font-size: 13px;
+}
+.work-course .wc-weeks,
+.work-course .wc-tabs {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 26px 0;
+}
+.wc-weeks button {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  text-align: left;
+  background: #fffcf5;
+  border: 1px solid #bdccb5;
+  border-radius: 10px;
+  padding: 16px;
+  color: #203b35;
+}
+.wc-weeks span {
+  font-size: 12px;
+}
+.wc-weeks button[aria-pressed="true"],
+.wc-tabs button[aria-pressed="true"] {
+  background: #294d3d;
+  color: #fff;
+}
+.wc-days {
+  display: grid;
+  gap: 12px;
+}
+.wc-day {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: 22px;
+  border: 1px solid #d5ddca;
+  border-radius: 12px;
+  background: #fffcf5;
+  color: #203b35;
+}
+.wc-day > div {
+  flex: 1;
+}
+.wc-day h3 {
+  margin: 5px 0;
+  font-size: 19px;
+}
+.wc-day p {
+  margin: 0;
+  font-size: 13px;
+}
+.wc-day small {
+  font-size: 11px;
+}
+.wc-number {
+  font-size: 28px;
+  color: #49673d;
+}
+.wc-footnote {
+  font-size: 12px;
+  color: #52655e;
+  margin-top: 22px;
+}
+.wc-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  color: #203b35;
+  padding: 12px 0;
+  margin-bottom: 22px;
+}
+.wc-tabs button {
+  padding: 12px 16px;
+  border: 1px solid #c4d0bc;
+  border-radius: 8px;
+  background: #fffcf5;
+  color: #203b35;
+}
+.wc-reading {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 28px;
+}
+.wc-reading figure {
+  margin: 0;
+}
+.wc-reading small {
+  font-size: 10px;
+}
+.wc-reading article > p {
+  font-size: 18px;
+}
+.work-course .wc-audio {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 1px solid #bdccb5;
+  border-radius: 50%;
+  background: #e6edde;
+  color: #294d3d;
+  vertical-align: middle;
+}
+.wc-phrases {
+  list-style: none;
+  padding: 0;
+}
+.wc-phrases li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  border-bottom: 1px solid #d6decd;
+}
+.wc-dialogue {
+  background: #eef1e7;
+  border-radius: 14px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.wc-dialogue p {
+  padding: 8px 0;
+}
+.wc-dialogue .wc-audio {
+  margin-left: 10px;
+}
+.wc-apply {
+  max-width: 800px;
+}
+.wc-apply textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  font: inherit;
+  line-height: 1.7;
+  padding: 16px;
+  border: 1px solid #91a286;
+  border-radius: 10px;
+  background: #fffcf5;
+  color: #203b35;
+  margin-top: 10px;
+}
+.wc-apply fieldset {
+  padding: 20px;
+  border: 1px solid #c4d0bc;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+.wc-apply fieldset label {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+.wc-apply > button {
+  margin: 12px 12px 12px 0;
+}
+.wc-model {
+  padding: 20px;
+  background: #edf0e4;
+  border-radius: 10px;
+}
+.wc-model small {
+  font-size: 12px;
+}
+.work-course [hidden] {
+  display: none !important;
+}
+@media (max-width: 700px) {
+  .wc-intro,
+  .wc-reading {
+    grid-template-columns: 1fr;
+  }
+  .wc-intro .wc-cover {
+    height: 180px;
+  }
+  .wc-day {
+    padding: 16px;
+    gap: 12px;
+  }
+  .wc-day h3 {
+    font-size: 17px;
+  }
+  .wc-tabs button {
+    font-size: 12px;
+    padding: 10px;
+  }
+  .wc-weeks button {
+    min-width: 120px;
+  }
+  .wc-reading .wc-cover {
+    height: 210px;
+  }
+}
+
+/* Keep tab labels readable while their selected state changes. */
+.work-course .wc-tabs button,
+.work-course .wc-weeks button {
+  transition: none;
+}
+
+.wc-understand,
+.wc-listening {
+  padding: clamp(16px, 3vw, 28px);
+  border: 1px solid #c4d0bc;
+  background: #fffcf5;
+  border-radius: 16px;
+  margin: 24px 0;
+}
+.wc-understand fieldset {
+  border: 0;
+  padding: 0;
+  margin: 20px 0;
+}
+.wc-understand legend {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.wc-understand label {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+  cursor: pointer;
+}
+.wc-understand input {
+  flex: 0 0 auto;
+}
+.wc-understand button,
+.wc-listening button:not(.wc-audio) {
+  padding: 12px 16px;
+  border: 1px solid #91a286;
+  border-radius: 10px;
+  background: #edf0e4;
+  color: #203b35;
+  margin: 8px 8px 8px 0;
+  transition: none;
+}
+.wc-understand button:disabled,
+.wc-listening button:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+.wc-listening textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  font: inherit;
+  background: #fff;
+  color: #203b35;
+  border: 1px solid #91a286;
+  border-radius: 10px;
+  margin: 12px 0;
+}
+.wc-listening form {
+  margin-top: 20px;
+}
+.wc-understand [role="status"],
+.wc-listening [role="status"] {
+  border-top: 1px solid #c4d0bc;
+  margin-top: 16px;
+  padding-top: 16px;
+}

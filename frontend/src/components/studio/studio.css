@@ -118,6 +118,14 @@
   display: grid;
   gap: 4px;
 }
+.studio-app .studio-section-nav{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin:20px 0 24px;border-bottom:1px solid #d4d9ca;padding-bottom:14px}
+.studio-section-nav button{border:1px solid transparent;background:transparent;color:#344e45;padding:9px 12px;border-radius:8px;font:inherit;font-size:12px;cursor:pointer}
+.studio-section-nav button[aria-current]{background:#e5ecdc;border-color:#bdcdb1;font-weight:700}
+.study-hub{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.study-hub .study-hub-card{display:flex;align-items:flex-start;gap:18px;text-align:left;padding:26px;background:#fffcf5;border:1px solid #d3ddc8;border-radius:14px;color:#203b35;font:inherit;cursor:pointer}
+.study-hub-card>div{flex:1}.study-hub-card>svg{flex-shrink:0}.studio-app .study-hub-card h2{font-size:23px;line-height:1.4;margin:10px 0}.study-hub-card small{font-size:11px;color:#50624a}.study-hub-card p{font-size:14px;line-height:1.8;margin-bottom:0}.study-hub-card:hover{border-color:#789468;background:#f1f4e9}
+.studio-home-links{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin-top:24px;padding-top:24px;border-top:1px solid #d4d9ca}
+@media(max-width:700px){.study-hub{grid-template-columns:1fr}.study-hub .study-hub-card{padding:20px}.studio-section-nav button{font-size:11px;padding:8px}.studio-app .study-hub-card h2{font-size:20px}}
 .studio-sidebar nav button {
   display: flex;
   align-items: center;

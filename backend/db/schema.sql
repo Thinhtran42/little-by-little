@@ -72,3 +72,6 @@ CREATE TABLE IF NOT EXISTS lesson_attempts (
  created_at timestamptz NOT NULL DEFAULT now(), PRIMARY KEY(user_id,event_key)
 );
 CREATE INDEX IF NOT EXISTS lesson_attempts_user_lesson_idx ON lesson_attempts(user_id,lesson_id,version,created_at DESC);
+ALTER TABLE lesson_attempts ADD COLUMN IF NOT EXISTS review_level smallint NOT NULL DEFAULT 0 CHECK(review_level BETWEEN 0 AND 5);
+ALTER TABLE lesson_attempts ADD COLUMN IF NOT EXISTS last_passed date;
+INSERT INTO schema_migrations(version) VALUES(2) ON CONFLICT DO NOTHING;

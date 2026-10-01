@@ -1,0 +1,216 @@
+.courses {
+  color: #23384e;
+}
+.learning-overview{margin:24px 0;padding:24px;border:1px solid #cecdbd;border-radius:18px;background:#eeeedf;color:#23384e}.learning-overview h2{font-size:24px;margin:12px 0}.learning-overview h3{margin-top:22px}.learning-overview p{margin:12px 0!important}.learning-overview-metrics{display:flex;gap:20px;flex-wrap:wrap}.learning-overview-metrics p{flex:1;min-width:150px}.learning-overview-metrics strong{display:block;font-size:24px}.learning-overview .studio-button{white-space:normal;text-align:left}
+.courses .reading-tabs { flex-direction: row; }
+.courses .reading-tabs > button { width: auto; }
+.courses .reading-tabs > button, .course-levels button { transition: none; }
+.course-intro {
+  padding: 28px;
+  border-radius: 20px;
+  background: #e9eddf;
+  border: 1px solid #c9cdbd;
+}
+.course-intro h2 {
+  font-size: 30px;
+  margin: 12px 0;
+}
+.course-intro small,
+.courses small {
+  color: #526174;
+  line-height: 1.7;
+}
+.course-levels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.course-levels button {
+  display: grid;
+  text-align: left;
+  padding: 24px;
+  gap: 10px;
+  border: 1px solid #b9c0bc;
+  border-radius: 18px;
+  background: #fffaf0;
+  color: #23384e;
+}
+.course-levels button[aria-pressed="true"] {
+  background: #23384e;
+  color: white;
+  border-color: #23384e;
+}
+.course-levels button[aria-pressed="true"] small {
+  color: #e1e7ef;
+}
+.course-levels strong {
+  font:
+    700 38px Georgia,
+    serif;
+}
+.course-notice {
+  padding: 16px;
+  border-left: 3px solid #315ace;
+  background: #eef1f7;
+}
+.course-unit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin: 24px 0;
+}
+.course-unit-card {
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #cecdbd;
+  border-radius: 18px;
+  background: #fffaf0;
+  color: #23384e;
+}
+.studio-app .course-unit-card > .real-photo {
+  height: 190px;
+}
+.course-unit-card > div {
+  padding: 22px;
+}
+.course-unit-card h3 {
+  margin: 12px 0;
+  font-size: 22px;
+}
+.course-unit-card small {
+  display: block;
+}
+.course-open {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  color: #315ace;
+  font-weight: 600;
+}
+.course-score {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+}
+.course-unit > h2 {
+  margin: 22px 0;
+  font-size: 30px;
+}
+.course-grammar,
+.course-flash {
+  padding: 26px;
+  border: 1px solid #cecdbd;
+  border-radius: 18px;
+  background: #fffaf0;
+  margin: 22px 0;
+}
+.course-grammar blockquote {
+  font:
+    24px/1.6 Georgia,
+    serif;
+  margin: 20px 0;
+  padding-left: 16px;
+  border-left: 3px solid #d6ab4f;
+}
+.course-grammar > .studio-button {
+  margin-top: 18px;
+}
+.course-related {
+  margin-top: 28px;
+  padding: 22px;
+  border-top: 1px solid #cecdbd;
+}
+.course-flash-face {
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: #e9eddf;
+  border: 1px solid #b9c0bc;
+  border-radius: 18px;
+  color: #23384e;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.course-flash-face strong {
+  font:
+    700 32px Georgia,
+    serif;
+}
+.course-flash-face em {
+  font:
+    22px/1.5 Georgia,
+    serif;
+}
+.course-card-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+.course-card-controls button {
+  padding: 12px 18px;
+  border: 1px solid #b9c0bc;
+  border-radius: 12px;
+}
+.course-card-controls button:disabled {
+  opacity: 0.5;
+}
+.course-quiz fieldset {
+  display: grid;
+  gap: 12px;
+  border: 1px solid #cecdbd;
+  border-radius: 12px;
+  padding: 18px;
+}
+.course-quiz fieldset label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px;
+}
+.course-quiz input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  margin: 0;
+  accent-color: #315ace;
+}
+.course-unit li {
+  margin-bottom: 12px;
+}
+.courses button:focus-visible {
+  outline: 3px solid #315ace;
+  outline-offset: 3px;
+}
+@media (max-width: 650px) {
+  .course-unit-grid {
+    grid-template-columns: 1fr;
+  }
+  .course-levels button {
+    padding: 16px;
+  }
+  .course-levels {
+    gap: 10px;
+  }
+  .course-intro {
+    padding: 20px;
+  }
+  .course-intro h2,
+  .course-unit > h2 {
+    font-size: 25px;
+  }
+  .course-grammar,
+  .course-flash {
+    padding: 18px;
+  }
+  .course-flash-face {
+    padding: 18px;
+  }
+}

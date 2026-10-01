@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ArrowRight, RotateCcw } from "lucide-react";
-import { FieldScene } from "../FieldScene.jsx";
+import { RealPhoto as FieldScene } from "../RealPhoto.jsx";
 import { mastery } from "../../progress.js";
 import { sceneFor } from "./studio-data.js";
 import { PhraseCard } from "./StudioLibrary.jsx";

@@ -1,3 +1,4 @@
+import { RealPhoto } from "./RealPhoto.jsx";
 import { Volume2 as PlaybackIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { stationLesson as lesson } from "../../../shared/station-lesson.js";
@@ -10,52 +11,7 @@ export default function StationLesson({ speak }) {
   const { user } = useLearner();
   return <Lesson key={user?.id || "guest"} user={user} speak={speak} />;
 }
-export function StationScene() {
-  return (
-    <svg
-      viewBox="0 0 700 260"
-      role="img"
-      aria-label="Linh cầm vali chờ ngoài cửa ga; Mai lái xe đến đón, hướng về phía Linh."
-      className="story-scene"
-    >
-      <rect width="700" height="260" rx="24" fill="#e7eee8" />
-      <rect x="420" y="30" width="250" height="170" rx="8" fill="#d3b997" />
-      <path d="M450 200V100Q490 45 530 100V200" fill="#537e78" />
-      <rect x="554" y="87" width="78" height="58" fill="#fff3d1" />
-      <text x="545" y="61" textAnchor="middle" fill="#423f39" fontSize="18">
-        STATION
-      </text>
-      <path d="M0 205H700" stroke="#b9c7bb" strokeWidth="8" />
-      <rect x="85" y="150" width="210" height="58" rx="20" fill="#e3a369" />
-      <path d="M125 151L145 112H235L268 151Z" fill="#729b9b" />
-      <circle cx="130" cy="210" r="19" fill="#384943" />
-      <circle cx="250" cy="210" r="19" fill="#384943" />
-      <circle cx="212" cy="133" r="11" fill="#f0c1a0" />
-      <circle cx="380" cy="113" r="20" fill="#d9a47e" />
-      <path d="M354 175V148Q380 126 400 149V175" fill="#777dae" />
-      <path d="M367 175V214M392 175V214" stroke="#485c58" strokeWidth="9" />
-      <rect x="420" y="163" width="28" height="45" rx="6" fill="#ce8267" />
-      <path
-        d="M427 163V151H440V163"
-        fill="none"
-        stroke="#775e50"
-        strokeWidth="3"
-      />
-      <path
-        d="M302 192H339L331 183M339 192L331 201"
-        stroke="#52765b"
-        strokeWidth="4"
-        fill="none"
-      />
-      <text x="110" y="241" fontSize="14" fill="#405d50">
-        Mai đến đón →
-      </text>
-      <text x="355" y="241" fontSize="14" fill="#405d50">
-        Linh chờ ở cửa ga
-      </text>
-    </svg>
-  );
-}
+export function StationScene() {return <div className="station-photo"><RealPhoto scene="bus"/></div>;}
 function Lesson({ user, speak }) {
   const [open, setOpen] = useState(false),
     [stage, setStage] = useState("story"),

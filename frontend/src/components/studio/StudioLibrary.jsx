@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight, Bookmark, Volume2, Check } from "lucide-react";
-import { FieldScene } from "../FieldScene.jsx";
+import { RealPhoto as FieldScene } from "../RealPhoto.jsx";
 import { mastery } from "../../progress.js";
 import { sceneFor, typeNames } from "./studio-data.js";
 export function TopicTile({ topic: t, c }) {

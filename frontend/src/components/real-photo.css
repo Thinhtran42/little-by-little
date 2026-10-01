@@ -1,0 +1,74 @@
+.studio-app .station-photo { height: 240px; border-radius: 16px; overflow: hidden; }
+.studio-app .real-photo {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #e5e3da;
+  min-height: 100px;
+}
+.real-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.real-photo .photo-credit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  font:
+    10px/1.5 "Be Vietnam Pro",
+    sans-serif;
+  color: white;
+  background: #152535d9;
+  padding: 4px 9px;
+  pointer-events: none;
+}
+.photo-unavailable {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 24px;
+  color: #23384e;
+  font-size: 13px;
+}
+.studio-app .studio-hero-art .real-photo {
+  height: 100%;
+  min-height: 340px;
+}
+.studio-app .studio-home-next > .real-photo {
+  height: 285px;
+  border-radius: 14px;
+}
+.studio-app .story-group-grid .real-photo {
+  height: 200px;
+}
+.studio-app .phrasal-stories > .real-photo {
+  height: 280px;
+}
+.studio-app .studio-topic-art .real-photo {
+  height: 100%;
+}
+.studio-app .studio-library-banner .real-photo {
+  height: 155px;
+}
+.studio-app .studio-context-scene .real-photo {
+  height: 100%;
+}
+.studio-app .studio-art-caption {
+  display: none;
+}
+@media (max-width: 760px) {
+  .studio-app .studio-hero-art .real-photo {
+    min-height: 245px;
+  }
+  .studio-app .studio-home-next > .real-photo {
+    height: 220px;
+  }
+  .studio-app .phrasal-stories > .real-photo {
+    height: 210px;
+  }
+}

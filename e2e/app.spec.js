@@ -101,10 +101,12 @@ test("bookmarks, search, and lesson path", async ({ page }) => {
   await page.getByRole("textbox").fill("thức dậy");
   await expect(page.locator(".studio-phrase")).toHaveCount(1);
   await page.getByRole("button", { name: "Lưu wake up", exact: true }).click();
+  await page.getByRole("button", { name: "Thư viện", exact: true }).click();
   await page.getByRole("button", { name: /Câu đã lưu/ }).click();
   await expect(page.locator(".studio-phrase")).toHaveCount(1);
   await page.reload();
   await expect(page.locator(".studio-phrase")).toHaveCount(1);
+  await page.getByRole("button", { name: "Khóa học", exact: true }).click();
   await page.getByRole("button", { name: "Lộ trình", exact: true }).click();
   await expect(page.locator(".studio-path-list > button")).toHaveCount(8);
   await page.locator(".studio-path-list > button").first().click();
@@ -151,6 +153,7 @@ test("export/import validates data and never silently replaces progress", async 
     });
   await expect(page.getByRole("dialog")).toContainText("1 câu đã xem");
   await page.getByRole("dialog").getByRole("button", { name: "Khôi phục", exact: true }).click();
+  await page.getByRole("button", { name: "Thư viện", exact: true }).click();
   await page.getByRole("button", { name: /Câu đã lưu/ }).click();
   await expect(page.locator(".studio-phrase")).toHaveCount(1);
 });
@@ -196,6 +199,7 @@ test("mobile more menu exposes all learning surfaces", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await page.getByRole("button", { name: "Mở menu", exact: true }).click();
+  await page.getByRole("button", { name: "Khóa học", exact: true }).click();
   await page.getByRole("button", { name: "Lộ trình", exact: true }).click();
   await expect(page.locator(".studio-path-list > button")).toHaveCount(8);
   await expect(page.getByRole("button", {name:"Mở menu"})).toHaveAttribute("aria-expanded","false");

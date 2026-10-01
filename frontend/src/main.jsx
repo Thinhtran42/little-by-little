@@ -26,8 +26,13 @@ function App() {
   const [page, setPage] = useState(() =>
       [
         "home",
+        "learn",
+        "library",
         "topics",
         "phrasal",
+        "reading",
+        "courses",
+        "work-course",
         "review",
         "saved",
         "path",
@@ -66,8 +71,13 @@ function App() {
       setPage(
         [
           "home",
+          "learn",
+          "library",
           "topics",
           "phrasal",
+          "reading",
+          "courses",
+          "work-course",
           "review",
           "saved",
           "path",

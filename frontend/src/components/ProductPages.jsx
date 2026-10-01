@@ -1,5 +1,6 @@
 import { Volume2 as PlaybackIcon } from "lucide-react";
 import { eventKey } from "../services/eventKey.js";
+import { api } from '../services/api.js';
 import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
@@ -685,15 +686,14 @@ export function AccountPage({ data, setData, notify, onSetup, speak }) {
       return null;
     }
   });
-  function download() {
+  async function download() {
+    let payload;
+    try { payload=user?await api('/me/export'):{app:'little-by-little',exportedAt:new Date().toISOString(),progress:data}; }
+    catch(e){notify(`Chưa xuất được dữ liệu: ${e.message}`);return;}
     const blob = new Blob(
         [
           JSON.stringify(
-            {
-              app: "little-by-little",
-              exportedAt: new Date().toISOString(),
-              progress: data,
-            },
+            payload,
             null,
             2,
           ),
@@ -707,7 +707,7 @@ export function AccountPage({ data, setData, notify, onSetup, speak }) {
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     notify(
-      "Đã xuất bản sao lưu. Giữ tệp này để chuyển tiến độ sang thiết bị khác.",
+      "Đã xuất dữ liệu. Tài khoản có kèm lịch sử bài kiểm tra; nhập tệp chỉ khôi phục kho câu, không xác nhận mức nhớ từ lịch sử nhập.",
     );
   }
   async function upload(e) {
@@ -909,6 +909,7 @@ export function AccountPage({ data, setData, notify, onSetup, speak }) {
       {pending && (
         <Modal title="Khôi phục bản sao lưu" onClose={() => setPending(null)}>
           <h2>Khôi phục tiến độ?</h2>
+          <p>Chỉ thay thế kho câu và thiết lập. Lịch sử B1/B2 và bài ở ga trên máy chủ được giữ nguyên; lịch sử trong tệp dùng để lưu trữ, không nhập thành kết quả đã xác minh.</p>
           <p className="muted-copy">
             Bản sao lưu có {Object.keys(pending.learned).length} câu đã xem và{" "}
             {pending.attempts.length} lượt luyện. Thao tác này thay thế tiến độ

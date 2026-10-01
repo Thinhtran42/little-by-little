@@ -4,6 +4,9 @@ test-results
 playwright-report
 .env
 .env.render
+.env.*
+!.env.example
+!.env.*.example
 .data/
 releases/
 *.log

@@ -16,17 +16,21 @@ import {
   learningDate,
 } from "./progress.repository.js";
 import { fail, text } from "../../common/errors.js";
+import { exportLessons } from '../lessons/lessons.repository.js';
 /** @param {{ db: import('../../db/types.js').Database }} dependencies */
 export function createLearningService({ db }) {
   async function getProgress({ actor }) {
     return readState(db, actor.id);
   }
   async function exportProgress({ actor }) {
-    return {
-      app: "little-by-little",
-      exportedAt: new Date().toISOString(),
-      progress: (await readState(db, actor.id)).state,
-    };
+    return db.transaction(async tx=>{
+      await lockUser(tx,actor.id);
+      return {
+        app: 'little-by-little', exportedAt:new Date().toISOString(),
+        progress:(await readState(tx,actor.id)).state,
+        lessons:{formatVersion:1,attempts:await exportLessons(tx,actor.id)},
+      };
+    });
   }
   async function applyCommands({ actor, input }) {
     const commands = input?.commands;
@@ -237,6 +241,7 @@ export function createLearningService({ db }) {
     await db.transaction(async (tx) => {
       await lockUser(tx, actor.id);
       await importState(tx, actor.id, initialState());
+      await tx.query('DELETE FROM lesson_attempts WHERE user_id=$1',[actor.id]);
     });
     return readState(db, actor.id);
   }

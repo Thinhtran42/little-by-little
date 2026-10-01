@@ -1,10 +1,9 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import { FieldScene } from "../FieldScene.jsx";
+import { RealPhoto as FieldScene } from "../RealPhoto.jsx";
 import { sceneFor } from "./studio-data.js";
-import ActionScene from "../ActionScene.jsx";
-import { TopicTile } from "./StudioLibrary.jsx";
-export function StudioHome({ c, motion }) {
+
+export function StudioHome({ c, motion, learningOverview }) {
   const recommended =
     c.topics.find((t) => t.id === c.daily[0]?.topic) || c.topics[0];
   return (
@@ -36,6 +35,7 @@ export function StudioHome({ c, motion }) {
             {c.data.profile.onboarded ? "Chỉnh nhịp học" : "Bắt đầu thiết lập"}{" "}
             ↗
           </button>
+          <button className="studio-hero-link" onClick={()=>c.nav('work-course')}>Khám phá khóa 4 tuần tiếng Anh công việc →</button>
         </div>
         <div className="studio-hero-art">
           <FieldScene
@@ -64,36 +64,25 @@ export function StudioHome({ c, motion }) {
           Ghé góc ôn tập <ArrowRight size={17} />
         </button>
       </div>
-      <section className="studio-home-next">
+      {learningOverview || <section className="studio-home-next">
         <div>
           <span className="studio-kicker">LEARN IT IN A MOMENT</span>
           <h2>
-            Nhìn hành động. <br />
-            Nhớ cách nói.
+            Một câu chuyện. <br />
+            Nhiều cách dùng.
           </h2>
           <p>
-            Một cụm từ dễ hiểu hơn khi bạn nhìn thấy nó xảy ra. Thử với “pick it
-            up”.
+            Đọc tình huống qua ảnh thật, chạm vào từ mới và thử trả lời một cuộc
+            trò chuyện.
           </p>
-          <button className="studio-link" onClick={() => c.nav("phrasal")}>
-            Khám phá các tình huống <ArrowRight size={18} />
+          <button className="studio-link" onClick={() => c.nav("reading")}>
+            Mở bài đọc & từ vựng <ArrowRight size={18} />
           </button>
+          <button className="studio-link" onClick={() => c.nav('courses')}>Học theo lộ trình B1/B2 <ArrowRight size={18}/></button>
         </div>
-        <ActionScene kind="cafe" motion={motion} />
-      </section>
-      <section>
-        <div className="studio-section-title">
-          <h2>Bạn muốn bắt đầu ở đâu?</h2>
-          <button className="studio-link" onClick={() => c.nav("topics")}>
-            Tất cả chủ đề <ArrowRight size={17} />
-          </button>
-        </div>
-        <div className="studio-topic-grid">
-          {c.topics.slice(0, 3).map((t) => (
-            <TopicTile key={t.id} topic={t} c={c} />
-          ))}
-        </div>
-      </section>
+        <FieldScene scene="friends" />
+      </section>}
+      <div className="studio-home-links"><button className="studio-link" onClick={()=>c.nav('learn')}>Chọn khóa học →</button><button className="studio-link" onClick={()=>c.nav('library')}>Mở thư viện →</button></div>
     </>
   );
 }
